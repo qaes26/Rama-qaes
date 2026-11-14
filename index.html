@@ -1,679 +1,1318 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <meta name="theme-color" content="#060608" />
+    <meta name="theme-color" content="#07070a" />
+    <meta name="description" content="الموقع التفاعلي الشامل لشرح كتاب عُقدك النفسية سجنك الأبدي للدكتور يوسف الحسني - إعداد القارئين: قيس الجازي وراما العرايضة" />
     <title>عُقدك النفسية سجنك الأبدي | إعداد القارئين: قيس الجازي وراما العرايضة</title>
 
-    <!-- Google Fonts: Aref Ruqaa & Amiri for Iconic Book Cover Typography, Tajawal for Crisp Body Text -->
+    <!-- خطوط عربية اختيارية مع بدائل نظام فورية تضمن عمل الموقع حتى بدون إنترنت -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        if (typeof tailwind !== 'undefined') {
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Tajawal', 'system-ui', '-apple-system', 'sans-serif'],
-                            serif: ['Amiri', 'Georgia', 'serif'],
-                            cover: ['Aref Ruqaa', 'Amiri', 'serif'],
-                        },
-                        colors: {
-                            void: {
-                                950: '#060608',
-                                900: '#0D0D11',
-                                850: '#121217',
-                                800: '#18181F',
-                            },
-                            blood: {
-                                950: '#2b040a',
-                                900: '#5c0815',
-                                800: '#8f0c20',
-                                700: '#C8102E',
-                                600: '#E61938',
-                                500: '#ff2a4b',
-                            },
-                            ivory: {
-                                50: '#FAF9F6',
-                                100: '#F5F5F7',
-                                200: '#E5E2DC',
-                                300: '#CFC9BE',
-                            }
-                        },
-                        boxShadow: {
-                            'crimson-glow': '0 0 28px rgba(200, 16, 46, 0.38)',
-                            'crimson-intense': '0 0 46px rgba(230, 25, 56, 0.55)',
-                            'hardcover': '0 26px 65px rgba(0, 0, 0, 0.92), 0 0 32px rgba(200, 16, 46, 0.22)',
-                        }
-                    }
-                }
-            };
-        }
-    </script>
-
     <style>
+        /* ==========================================================================
+           1. نظام التصميم الأساسي (100% Pure Self-Contained CSS - No External CDNs)
+           ========================================================================== */
         :root {
-            --bg-matte-black: #060608;
-            --bg-cover-surface: #0D0D11;
-            --crimson-primary: #C8102E;
-            --crimson-vivid: #E61938;
-            --ivory-ink: #F5F5F7;
+            --bg-deep: #07070a;
+            --bg-card: #101017;
+            --bg-card-alt: #161621;
+            --bg-crimson-dark: #28050d;
+            --crimson-main: #e11d48;
+            --crimson-bright: #ff2a55;
+            --crimson-deep: #9f1239;
+            --crimson-border: rgba(225, 29, 72, 0.42);
+            --gold-accent: #f59e0b;
+            --text-white: #f8fafc;
+            --text-Soft: #e2e8f0;
+            --text-muted: #94a3b8;
+            --shadow-crimson: 0 10px 35px rgba(225, 29, 72, 0.28);
+            --shadow-card: 0 18px 45px rgba(0, 0, 0, 0.85);
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
         }
 
         * {
             box-sizing: border-box;
-        }
-
-        html, body {
-            background-color: #060608 !important;
-            color: #F5F5F7 !important;
-            font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
-            overflow-x: hidden;
             margin: 0;
             padding: 0;
         }
 
-        /* Explicit Font Fallbacks so Typography Always Looks Majestic */
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-deep);
+            color: var(--text-white);
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(225, 29, 72, 0.14) 0%, transparent 40%),
+                radial-gradient(circle at 85% 35%, rgba(159, 18, 57, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(225, 29, 72, 0.10) 0%, transparent 50%);
+            color: var(--text-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
         .font-cover {
             font-family: 'Aref Ruqaa', 'Amiri', 'Traditional Arabic', serif;
         }
-        .font-serif {
+
+        .font-serif-ar {
             font-family: 'Amiri', 'Traditional Arabic', Georgia, serif;
         }
 
-        ::selection {
-            background: rgba(200, 16, 46, 0.45);
-            color: #ffffff;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        /* Custom Crimson Scrollbar */
-        ::-webkit-scrollbar {
-            width: 7px;
-            height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #060608;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #8f0c20, #E61938);
-            border-radius: 999px;
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
         }
 
-        /* Hide horizontal scrollbar on mobile nav pills */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Top Crimson Reading Progress Bar */
-        #scroll-progress {
+        /* شريط تقدم القراءة العلوي */
+        #readingProgress {
             position: fixed;
             top: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             width: 0%;
-            background: linear-gradient(90deg, #E61938, #C8102E, #8f0c20);
-            box-shadow: 0 0 14px #E61938;
+            background: linear-gradient(90deg, #ff2a55, #e11d48, #f59e0b);
+            box-shadow: 0 0 15px #e11d48;
             z-index: 9999;
-            transition: width 0.08s ease-out;
+            transition: width 0.1s ease-out;
         }
 
-        /* Interactive Canvas Background */
-        #prisonCanvas {
+        /* خلفية الشرارات التفاعلية */
+        #sparksCanvas {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            pointer-events: none;
             z-index: 0;
-            pointer-events: none;
         }
 
-        /* Matte Hardcover Book Grain & Chiaroscuro Spotlight */
-        .matte-hardcover-bg {
-            background-color: #0D0D11;
-            background-image:
-                radial-gradient(circle at 30% 20%, rgba(200, 16, 46, 0.15) 0%, transparent 55%),
-                radial-gradient(circle at 80% 85%, rgba(200, 16, 46, 0.1) 0%, transparent 50%),
-                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 3px);
+        /* حاوية العرض المتجاوبة */
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 16px;
+            position: relative;
+            z-index: 2;
         }
 
-        .ambient-chiaroscuro {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at 50% 18%, rgba(200, 16, 46, 0.12) 0%, rgba(6, 6, 8, 0.78) 65%, #060608 100%);
-            z-index: 1;
-            pointer-events: none;
+        /* ==========================================================================
+           2. الهيدر العلوي المتجاوب (Sticky Header)
+           ========================================================================== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 7, 10, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--crimson-border);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* =========================================================
-           SAFE PROGRESSIVE ENHANCEMENT:
-           Everything is 100% VISIBLE by default (opacity: 1).
-           Never hides content if JS or Fonts are delayed!
-           ========================================================= */
-        .reveal-item {
-            opacity: 1;
-            transform: translateY(0);
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0 8px;
         }
 
-        /* =========================================================
-           3D REALISTIC ARABIC HARDCOVER BOOK MOCKUP (RTL)
-           ========================================================= */
-        .book-stage {
-            perspective: 1500px;
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--crimson-main), #28050d);
+            border: 1px solid var(--crimson-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-crimson);
+            flex-shrink: 0;
+        }
+
+        .brand-text-box {
+            min-width: 0;
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-white);
+            line-height: 1.3;
+        }
+
+        .brand-title span {
+            color: var(--crimson-bright);
+        }
+
+        .readers-pill-header {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: var(--bg-crimson-dark);
+            border: 1px solid var(--crimson-main);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--crimson-bright);
+            box-shadow: 0 0 8px var(--crimson-bright);
+            display: inline-block;
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.65; }
+        }
+
+        .header-cta {
+            padding: 9px 16px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--crimson-bright), var(--crimson-deep));
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.82rem;
+            box-shadow: var(--shadow-crimson);
+            white-space: nowrap;
+            transition: transform 0.2s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* شريط روابط التنقل السريع (يعمل على الموبايل والكمبيوتر بسلاسة) */
+        .quick-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 8px 0 10px;
+            border-top: 1px solid rgba(225, 29, 72, 0.2);
+            scrollbar-width: none;
+        }
+
+        .quick-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-chip {
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid rgba(225, 29, 72, 0.35);
+            color: var(--text-Soft);
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .nav-chip:hover, .nav-chip.active-chip {
+            background: var(--crimson-main);
+            border-color: var(--crimson-bright);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
+        }
+
+        /* ==========================================================================
+           3. قسم الواجهة الرئيسية ومحاكاة غلاف الكتاب ثلاثي الأبعاد (Hero & 3D Book)
+           ========================================================================== */
+        .hero-section {
+            padding: 36px 0 60px;
+            border-bottom: 1px solid rgba(225, 29, 72, 0.28);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (min-width: 960px) {
+            .hero-grid {
+                grid-template-columns: 7fr 5fr;
+                gap: 48px;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .author-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            align-self: flex-start;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: var(--bg-card);
+            border: 1px solid var(--crimson-border);
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--text-Soft);
+        }
+
+        .hero-title {
+            font-size: clamp(2.3rem, 6vw, 4.2rem);
+            line-height: 1.22;
+            font-weight: 900;
+            color: var(--text-white);
+            text-shadow: 0 6px 25px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-title .crimson-word {
+            display: block;
+            color: var(--crimson-bright);
+            text-shadow: 0 0 30px rgba(225, 29, 72, 0.6);
+            margin-top: 6px;
+        }
+
+        /* بطاقة توثيق القارئين البارزة في الهيرو */
+        .readers-hero-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(40, 5, 13, 0.95), rgba(16, 16, 23, 0.95));
+            border: 2px solid var(--crimson-main);
+            box-shadow: var(--shadow-crimson);
+        }
+
+        .readers-hero-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: rgba(225, 29, 72, 0.2);
+            border: 1px solid var(--crimson-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+
+        .readers-hero-label {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--gold-accent);
+        }
+
+        .readers-hero-names {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .readers-hero-names span {
+            color: var(--crimson-bright);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-Soft);
+            line-height: 1.85;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 4px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--crimson-bright), var(--crimson-deep));
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.98rem;
+            box-shadow: var(--shadow-crimson);
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 35px rgba(225, 29, 72, 0.45);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 22px;
+            border-radius: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--crimson-main);
+            color: var(--text-white);
+            font-weight: 800;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-crimson-dark);
+            border-color: var(--crimson-bright);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(225, 29, 72, 0.28);
+        }
+
+        .stat-box {
+            background: rgba(16, 16, 23, 0.85);
+            border: 1px solid rgba(225, 29, 72, 0.28);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--crimson-bright);
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        /* ==========================================================================
+           4. مجسم الكتاب ثلاثي الأبعاد التفاعلي (3D Book Cover Replica)
+           ========================================================================== */
+        .book-showcase-col {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .book-3d-wrapper {
-            position: relative;
-            width: 270px;
-            height: 415px;
-            transform-style: preserve-3d;
-            -webkit-transform-style: preserve-3d;
-            transform: rotateY(15deg) rotateX(3deg);
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            cursor: pointer;
+        .book-scene {
+            perspective: 1400px;
+            width: 280px;
+            height: 430px;
             margin: 0 auto;
+            position: relative;
         }
 
-        @media (min-width: 640px) {
-            .book-3d-wrapper {
-                width: 335px;
-                height: 505px;
-                transform: rotateY(18deg) rotateX(4deg);
+        @media (min-width: 500px) {
+            .book-scene {
+                width: 315px;
+                height: 475px;
             }
         }
 
-        .book-3d-wrapper.front-flat {
-            transform: rotateY(0deg) rotateX(0deg) !important;
+        .book-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(16deg) rotateX(4deg);
+            transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
         }
 
-        /* Front Hardcover Face */
-        .book-front-cover {
+        .book-3d.is-flipped {
+            transform: rotateY(-180deg) rotateX(0deg) !important;
+        }
+
+        /* الوجه الأمامي للغلاف */
+        .book-face-front {
             position: absolute;
             inset: 0;
-            border-radius: 6px 14px 14px 6px;
-            background-color: #09090C;
-            background-image:
-                radial-gradient(circle at 50% 42%, rgba(200, 16, 46, 0.24) 0%, rgba(13, 13, 17, 0.96) 68%),
-                repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 2px);
-            border: 1.5px solid rgba(200, 16, 46, 0.52);
-            box-shadow:
-                inset 0 0 32px rgba(0, 0, 0, 0.95),
-                inset -4px 0 10px rgba(255, 255, 255, 0.06),
-                -18px 24px 48px rgba(0, 0, 0, 0.92),
-                0 0 36px rgba(200, 16, 46, 0.26);
+            background: radial-gradient(circle at 50% 45%, #24050c 0%, #09090d 72%);
+            border: 2px solid var(--crimson-main);
+            border-radius: 6px 16px 16px 6px;
+            box-shadow: 
+                inset 0 0 35px rgba(0,0,0,0.95),
+                -15px 22px 45px rgba(0, 0, 0, 0.9),
+                0 0 35px rgba(225, 29, 72, 0.3);
             transform: translateZ(20px);
-            overflow: hidden;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 18px 18px 15px 18px;
+            padding: 20px 18px 16px;
+            overflow: hidden;
         }
 
-        /* Hardcover Hinge Groove near Right Spine */
-        .book-front-cover::before {
+        /* حز كعب الغلاف الفني */
+        .book-face-front::after {
             content: '';
             position: absolute;
             top: 0;
             bottom: 0;
             right: 12px;
             width: 3px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.85), rgba(255,255,255,0.08), rgba(0,0,0,0.9));
-            pointer-events: none;
-            z-index: 20;
+            background: linear-gradient(90deg, rgba(0,0,0,0.85), rgba(255,255,255,0.12), rgba(0,0,0,0.85));
         }
 
-        /* Right Side Spine (كعب الكتاب العربي) */
-        .book-spine {
+        /* الوجه الخلفي للغلاف (يظهر عند قلب الكتاب) */
+        .book-face-back {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, #120408 0%, #08080c 100%);
+            border: 2px solid var(--crimson-main);
+            border-radius: 16px 6px 6px 16px;
+            padding: 24px 20px;
+            transform: rotateY(180deg) translateZ(20px);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.9);
+            text-align: right;
+        }
+
+        /* كعب الكتاب العربي على اليمين */
+        .book-spine-3d {
             position: absolute;
             top: 2px;
             bottom: 2px;
             right: -20px;
             width: 40px;
-            background: linear-gradient(90deg, #070709 0%, #16161d 35%, #0a0a0e 75%, #2b040a 100%);
-            border-top: 1px solid rgba(200, 16, 46, 0.55);
-            border-bottom: 1px solid rgba(200, 16, 46, 0.55);
+            background: linear-gradient(90deg, #070709, #2b0610, #09090d);
+            border-top: 1px solid var(--crimson-main);
+            border-bottom: 1px solid var(--crimson-main);
             transform: rotateY(90deg);
-            transform-origin: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 12px rgba(0,0,0,0.9);
         }
 
-        .book-spine-text {
+        .book-spine-3d span {
             writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-family: 'Amiri', serif;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-white);
             letter-spacing: 0.5px;
-            color: #F5F5F7;
-            white-space: nowrap;
         }
 
-        /* Left Side Paper Page Block (حواف الصفحات الورقية) */
-        .book-pages-edge {
+        /* حواف الصفحات الورقية على اليسار */
+        .book-pages-3d {
             position: absolute;
             top: 6px;
             bottom: 6px;
             left: -17px;
             width: 34px;
-            background: repeating-linear-gradient(
-                90deg,
-                #e8e4dc 0px,
-                #cfc8bc 1.5px,
-                #f5f2eb 3px
-            );
+            background: repeating-linear-gradient(90deg, #eae6df 0px, #cdc6b8 1.5px, #f7f4ee 3px);
             transform: rotateY(-90deg);
-            transform-origin: center;
-            box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.45);
-            border-radius: 2px;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.45);
         }
 
-        /* Back Hardcover */
-        .book-back-cover {
-            position: absolute;
-            inset: 0;
-            border-radius: 6px 14px 14px 6px;
-            background: #050507;
-            border: 1px solid #3a0710;
-            transform: translateZ(-20px);
-        }
-
-        /* Floor Ambient Crimson Shadow below Book */
-        .book-floor-shadow {
+        .book-shadow-base {
             width: 240px;
-            height: 24px;
-            margin: 16px auto 0;
-            background: radial-gradient(ellipse at center, rgba(200, 16, 46, 0.48) 0%, rgba(0, 0, 0, 0.85) 55%, transparent 75%);
-            filter: blur(8px);
-            border-radius: 50%;
-            animation: shadowBreathe 5s ease-in-out infinite;
+            height: 22px;
+            margin-top: 16px;
+            background: radial-gradient(ellipse at center, rgba(225, 29, 72, 0.5) 0%, transparent 72%);
+            filter: blur(7px);
         }
 
-        @keyframes shadowBreathe {
-            0%, 100% { transform: scaleX(1); opacity: 0.85; }
-            50% { transform: scaleX(0.9); opacity: 0.6; }
+        .book-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
         }
 
-        @keyframes floatBook {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+        .btn-book-control {
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: var(--bg-card);
+            border: 1px solid var(--crimson-main);
+            color: var(--text-white);
+            font-size: 0.8rem;
+            font-weight: 800;
+            transition: all 0.2s ease;
         }
 
-        .book-float-container {
-            animation: floatBook 5.5s ease-in-out infinite;
+        .btn-book-control:hover {
+            background: var(--crimson-main);
+            color: #fff;
         }
 
-        @keyframes birdSoar {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-5px, -7px) rotate(-3deg); }
+        /* ==========================================================================
+           5. تنسيقات الأقسام والبطاقات (Sections, Search, Filter Pills)
+           ========================================================================== */
+        .section-block {
+            padding: 65px 0;
+            border-bottom: 1px solid rgba(225, 29, 72, 0.25);
         }
 
-        .cover-bird-anim {
-            animation: birdSoar 3.8s ease-in-out infinite;
+        .section-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 38px;
         }
 
-        /* Book Page Card Styling for Chapters */
-        .book-page-card {
-            background-color: #0D0D11;
-            background-image:
-                radial-gradient(circle at top left, rgba(200, 16, 46, 0.12), transparent 48%),
-                repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 4px);
-            border: 1px solid rgba(200, 16, 46, 0.32);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.82);
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        .section-kicker {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 999px;
+            background: var(--bg-crimson-dark);
+            border: 1px solid var(--crimson-main);
+            color: var(--crimson-bright);
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
 
-        .book-page-card:hover {
-            border-color: rgba(230, 25, 56, 0.75);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 28px rgba(200, 16, 46, 0.24);
-            transform: translateY(-4px);
+        .section-title {
+            font-size: clamp(1.9rem, 4.5vw, 3rem);
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 10px;
         }
 
-        /* Cover-Inspired Quote Card */
-        .cover-quote-card {
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* شريط البحث والفلترة */
+        .toolbar-box {
+            background: var(--bg-card);
+            border: 1px solid var(--crimson-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 240px;
+            padding: 13px 18px;
+            border-radius: 12px;
+            background: var(--bg-deep);
+            border: 1px solid var(--crimson-border);
+            color: var(--text-white);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--crimson-bright);
+            box-shadow: 0 0 15px rgba(225, 29, 72, 0.25);
+        }
+
+        .filter-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            border-radius: 10px;
+            background: var(--bg-deep);
+            border: 1px solid rgba(225, 29, 72, 0.35);
+            color: var(--text-Soft);
+            font-size: 0.84rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--crimson-main);
+            border-color: var(--crimson-bright);
+            color: #fff;
+            box-shadow: 0 0 14px rgba(225, 29, 72, 0.4);
+        }
+
+        /* ==========================================================================
+           6. بطاقات الفصول التسعة الكاملة (Chapters Grid & Cards)
+           ========================================================================== */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 28px;
+        }
+
+        @media (min-width: 920px) {
+            .chapters-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .chapter-card {
+            background: linear-gradient(160deg, var(--bg-card) 0%, #0b0b10 100%);
+            border: 1px solid var(--crimson-border);
+            border-radius: var(--radius-lg);
+            padding: 26px 22px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
             position: relative;
-            background-color: #0B0B0F;
-            background-image:
-                radial-gradient(circle at 85% 15%, rgba(200, 16, 46, 0.16) 0%, transparent 50%),
-                repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 3px);
-            border: 1px solid rgba(200, 16, 46, 0.32);
-            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.8);
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .cover-quote-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 20px;
-            width: 16px;
-            height: 24px;
-            background: linear-gradient(180deg, #E61938, #8f0c20);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
-            opacity: 0.9;
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--crimson-bright);
+            box-shadow: 0 22px 50px rgba(0,0,0,0.9), 0 0 25px rgba(225, 29, 72, 0.22);
         }
 
-        .cover-quote-card:hover {
-            border-color: #E61938;
+        .chapter-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .chapter-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .ch-num-badge {
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: var(--crimson-main);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .ch-cat-badge {
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: var(--bg-deep);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: var(--gold-accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .chapter-title {
+            font-size: 1.45rem;
+            font-weight: 900;
+            color: var(--text-white);
+            line-height: 1.35;
+        }
+
+        .chapter-subtitle {
+            font-size: 0.88rem;
+            color: var(--crimson-bright);
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .chapter-icon-box {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: var(--bg-deep);
+            border: 1px solid var(--crimson-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 10px;
+            box-shadow: 0 0 18px rgba(225, 29, 72, 0.25);
+        }
+
+        /* صندوق الاقتباس داخل الفصل */
+        .chapter-quote-box {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.16) 0%, rgba(7, 7, 10, 0.92) 100%);
+            border-right: 4px solid var(--crimson-bright);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+
+        .quote-box-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--crimson-bright);
+        }
+
+        .copy-mini-btn {
+            padding: 4px 11px;
+            border-radius: 8px;
+            background: var(--bg-deep);
+            border: 1px solid var(--crimson-border);
+            color: var(--text-white);
+            font-size: 0.74rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .copy-mini-btn:hover {
+            background: var(--crimson-main);
+            color: #fff;
+        }
+
+        .chapter-quote-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.8;
+        }
+
+        /* الشرح النفسي */
+        .chapter-explain-box {
+            background: rgba(7, 7, 10, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 14px;
+            padding: 15px 16px;
+        }
+
+        .box-label {
+            font-size: 0.86rem;
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .box-label span {
+            color: var(--crimson-bright);
+        }
+
+        .box-text {
+            font-size: 0.94rem;
+            color: var(--text-Soft);
+            line-height: 1.75;
+        }
+
+        /* النصيحة والفائدة جنباً إلى جنب */
+        .chapter-dual-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        @media (min-width: 540px) {
+            .chapter-dual-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .advice-box {
+            background: rgba(40, 5, 13, 0.55);
+            border: 1px solid rgba(225, 29, 72, 0.4);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .benefit-box {
+            background: rgba(16, 16, 23, 0.9);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .chapter-card-footer {
+            padding-top: 12px;
+            border-top: 1px solid rgba(225, 29, 72, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        /* ==========================================================================
+           7. معرض الاقتباسات الخالدة بتصميم غلاف الكتاب المصغر (Quotes Gallery)
+           ========================================================================== */
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+        }
+
+        @media (min-width: 680px) {
+            .quotes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1040px) {
+            .quotes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .quote-cover-card {
+            background: radial-gradient(circle at 85% 15%, rgba(225, 29, 72, 0.18), #0b0b10 65%);
+            border: 1.5px solid var(--crimson-border);
+            border-radius: var(--radius-lg);
+            padding: 22px 20px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            position: relative;
+            transition: all 0.28s ease;
+        }
+
+        .quote-cover-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.92), 0 0 26px rgba(230, 25, 56, 0.24);
+            border-color: var(--crimson-bright);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.92), 0 0 24px rgba(225, 29, 72, 0.28);
         }
 
-        /* Quote Highlight Box inside Chapters */
-        .chapter-quote-inset {
-            background: linear-gradient(135deg, rgba(200, 16, 46, 0.15) 0%, rgba(6, 6, 8, 0.92) 100%);
-            border-right: 4px solid #E61938;
+        /* ثيمات بطاقة الغلاف القابلة للتبديل */
+        .quote-cover-card.theme-crimson {
+            background: linear-gradient(145deg, #5c0818 0%, #24040a 60%, #09090d 100%);
+            border-color: #ff2a55;
         }
 
-        /* Modal Backdrop */
-        .modal-backdrop {
-            background: rgba(6, 6, 8, 0.92);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+        .quote-cover-card.theme-parchment {
+            background: linear-gradient(145deg, #f8f5ec 0%, #e8e0cf 100%);
+            border-color: #9f1239;
+            color: #111115;
         }
 
-        /* Highlight Pulse when jumping from Quiz */
-        @keyframes highlightCardPulse {
-            0% { box-shadow: 0 0 0 0 rgba(230, 25, 56, 0.9); border-color: #E61938; }
-            50% { box-shadow: 0 0 48px 14px rgba(230, 25, 56, 0.45); border-color: #E61938; }
-            100% { box-shadow: 0 20px 45px rgba(0, 0, 0, 0.82); border-color: rgba(200, 16, 46, 0.35); }
+        .quote-cover-card.theme-parchment .q-card-text,
+        .quote-cover-card.theme-parchment .q-book-mini-title {
+            color: #111115 !important;
         }
 
-        .card-highlighted {
-            animation: highlightCardPulse 2.4s ease-out;
+        .quote-cover-card.theme-parchment .q-reflection {
+            background: rgba(159, 18, 57, 0.08);
+            color: #2b0610;
+        }
+
+        .q-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(225, 29, 72, 0.28);
+        }
+
+        .q-book-mini-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--text-white);
+        }
+
+        .q-book-mini-title span {
+            color: var(--crimson-bright);
+        }
+
+        .q-cat-tag {
+            padding: 3px 9px;
+            border-radius: 6px;
+            background: var(--bg-crimson-dark);
+            border: 1px solid var(--crimson-main);
+            color: var(--crimson-bright);
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .q-card-text {
+            font-size: 1.18rem;
+            font-style: italic;
+            line-height: 1.85;
+            color: var(--text-white);
+        }
+
+        .q-reflection {
+            font-size: 0.84rem;
+            color: var(--text-Soft);
+            background: rgba(7, 7, 10, 0.65);
+            border-right: 3px solid var(--gold-accent);
+            padding: 9px 12px;
+            border-radius: 8px;
+        }
+
+        .q-card-footer {
+            padding-top: 12px;
+            border-top: 1px solid rgba(225, 29, 72, 0.22);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .q-credit-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .q-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .q-btn {
+            flex: 1;
+            padding: 8px 10px;
+            border-radius: 9px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            background: var(--bg-deep);
+            border: 1px solid var(--crimson-border);
+            color: var(--text-white);
+            transition: all 0.2s ease;
+        }
+
+        .q-btn:hover {
+            background: var(--crimson-main);
+            color: #fff;
+        }
+
+        /* ==========================================================================
+           8. البوصلة النفسية التفاعلية (Interactive Quiz)
+           ========================================================================== */
+        .quiz-card {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 2px solid var(--crimson-main);
+            border-radius: var(--radius-lg);
+            padding: 28px 22px;
+            box-shadow: var(--shadow-crimson);
+        }
+
+        .quiz-option-btn {
+            width: 100%;
+            text-align: right;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            background: var(--bg-deep);
+            border: 1px solid var(--crimson-border);
+            color: var(--text-white);
+            font-size: 0.96rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option-btn:hover {
+            background: var(--bg-crimson-dark);
+            border-color: var(--crimson-bright);
+            transform: translateX(-4px);
+        }
+
+        /* ==========================================================================
+           9. الفوتر وبطاقة التوثيق الختامية للقارئين
+           ========================================================================== */
+        .site-footer {
+            padding: 60px 0 45px;
+            background: #050508;
+        }
+
+        .dedication-card {
+            background: linear-gradient(135deg, #24050c 0%, #0d0d13 65%, #190409 100%);
+            border: 2px solid var(--crimson-main);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            box-shadow: var(--shadow-crimson);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .dedication-names {
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            font-weight: 900;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .dedication-names span {
+            color: var(--crimson-bright);
+        }
+
+        /* إشعار النسخ (Toast) */
+        #toastBox {
+            position: fixed;
+            bottom: 22px;
+            left: 22px;
+            z-index: 99999;
+            background: #12121a;
+            border: 2px solid var(--crimson-bright);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 0.88rem;
+            box-shadow: var(--shadow-crimson);
+            display: none;
+        }
+
+        .hidden-item {
+            display: none !important;
         }
     </style>
 </head>
-<body class="bg-[#060608] text-[#F5F5F7] antialiased selection:bg-[#C8102E] selection:text-white">
+<body>
 
-    <!-- Top Crimson Reading Progress Bar -->
-    <div id="scroll-progress"></div>
+    <!-- شريط تقدم القراءة العلوي -->
+    <div id="readingProgress"></div>
 
-    <!-- Interactive HTML5 Canvas: Prison Bars & Crimson Sparks -->
-    <canvas id="prisonCanvas"></canvas>
-    <div class="ambient-chiaroscuro"></div>
+    <!-- خلفية الشرارات التفاعلية -->
+    <canvas id="sparksCanvas"></canvas>
 
-    <!-- Toast Notification Container (Zero alert() usage) -->
-    <div id="toast-container" class="fixed bottom-5 left-4 right-4 sm:right-auto sm:left-6 z-[10000] flex flex-col gap-2.5 pointer-events-none"></div>
+    <!-- إشعار النسخ الفوري -->
+    <div id="toastBox">تم نسخ الاقتباس مع التوثيق بنجاح ❝</div>
 
-    <!-- =====================================================================
-         MOBILE-FIRST RESPONSIVE STICKY NAVIGATION BAR
-         ===================================================================== -->
-    <header class="sticky top-0 z-40 border-b border-[#5c0815]/60 bg-[#060608]/95 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-2.5 sm:py-3.5">
-            <!-- Top Row: Emblem + Book Title + Reader Credits + Desktop Nav -->
-            <div class="flex items-center justify-between gap-3">
-                <a href="#top" class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 group">
-                    <!-- Crimson Book Emblem -->
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#C8102E] to-[#0D0D11] border border-[#E61938]/70 flex items-center justify-center shadow-crimson-glow shrink-0 group-hover:scale-105 transition-transform">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#F5F5F7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <!-- ==========================================================================
+         الهيدر العلوي الثابت والمتجاوب
+         ========================================================================== -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <a href="#hero" class="brand-wrap">
+                    <div class="brand-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <!-- Title & Reader Credits Pill -->
-                    <div class="min-w-0">
-                        <div class="font-cover text-base sm:text-xl font-bold tracking-wide text-[#F5F5F7] truncate group-hover:text-[#E61938] transition-colors">
-                            عُقَدُكَ النَّفْسِيَّةُ <span class="text-[#E61938]">سِجْنُكَ الأَبَدِيُّ</span>
+                    <div class="brand-text-box">
+                        <div class="brand-title font-cover">
+                            عُقَدُكَ النَّفْسِيَّةُ <span>سِجْنُكَ الأَبَدِيُّ</span>
                         </div>
-                        <div class="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-[#F5F5F7] bg-[#2b040a] border border-[#C8102E]/65 px-2.5 py-0.5 rounded-full mt-0.5 max-w-full">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#E61938] shrink-0"></span>
-                            <span class="truncate">إعداد القارئين: قيس الجازي وراما العرايضة</span>
+                        <div class="readers-pill-header">
+                            <span class="pulse-dot"></span>
+                            <span>إعداد القارئين: قيس الجازي وراما العرايضة</span>
                         </div>
                     </div>
                 </a>
 
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden lg:flex items-center gap-6 text-sm font-bold text-[#E5E2DC]">
-                    <a href="#top" class="hover:text-[#E61938] transition-colors py-1">الغلاف</a>
-                    <a href="#about-book" class="hover:text-[#E61938] transition-colors py-1">فلسفة الكتاب</a>
-                    <a href="#chapters-section" class="hover:text-[#E61938] transition-colors py-1">الفصول (9)</a>
-                    <a href="#quotes-gallery-section" class="hover:text-[#E61938] transition-colors py-1 flex items-center gap-1.5">
-                        <span>الاقتباسات</span>
-                        <span class="px-1.5 py-0.5 text-[10px] rounded bg-[#C8102E] text-white">24</span>
-                    </a>
-                    <a href="#diagnostic-tool" class="hover:text-[#E61938] transition-colors py-1">اكتشف قيدك</a>
-                    <a href="#credits-footer" class="hover:text-[#E61938] transition-colors py-1">فريق الإعداد</a>
-                </nav>
-
-                <!-- Quick CTA Button -->
-                <a href="#quotes-gallery-section" class="shrink-0 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-l from-[#E61938] to-[#8f0c20] hover:from-[#ff2a4b] hover:to-[#C8102E] text-white text-xs sm:text-sm font-extrabold shadow-crimson-glow transition-all active:scale-95">
-                    الاقتباسات ❝
-                </a>
+                <a href="#quotes-section" class="header-cta">اقتباسات الكتاب ❝</a>
             </div>
 
-            <!-- Mobile & Tablet Compact Quick-Navigation Strip (No crowding, smooth touch pills) -->
-            <nav aria-label="التنقل السريع" class="flex lg:hidden items-center gap-2 overflow-x-auto no-scrollbar pt-2.5 mt-2 border-t border-[#5c0815]/40 text-xs font-bold">
-                <a href="#top" class="shrink-0 px-3 py-1.5 rounded-lg bg-[#0D0D11] border border-[#8f0c20]/50 text-[#F5F5F7] hover:border-[#E61938]">
-                    الغلاف
-                </a>
-                <a href="#chapters-section" class="shrink-0 px-3 py-1.5 rounded-lg bg-[#0D0D11] border border-[#8f0c20]/50 text-[#F5F5F7] hover:border-[#E61938]">
-                    الفصول التسعة
-                </a>
-                <a href="#quotes-gallery-section" class="shrink-0 px-3 py-1.5 rounded-lg bg-[#2b040a] border border-[#C8102E]/70 text-[#E61938]">
-                    معرض الاقتباسات (24)
-                </a>
-                <a href="#diagnostic-tool" class="shrink-0 px-3 py-1.5 rounded-lg bg-[#0D0D11] border border-[#8f0c20]/50 text-[#F5F5F7] hover:border-[#E61938]">
-                    اكتشف قيدك
-                </a>
-                <a href="#credits-footer" class="shrink-0 px-3 py-1.5 rounded-lg bg-[#0D0D11] border border-[#8f0c20]/50 text-[#F5F5F7] hover:border-[#E61938]">
-                    فريق الإعداد
-                </a>
+            <!-- شريط التنقل السريع (يعمل على الجوال والكمبيوتر) -->
+            <nav class="quick-nav" aria-label="التنقل السريع">
+                <a href="#hero" class="nav-chip active-chip">الرئيسية والغلاف</a>
+                <a href="#chapters-section" class="nav-chip">الفصول التسعة (9)</a>
+                <a href="#quotes-section" class="nav-chip">معرض الاقتباسات (18)</a>
+                <a href="#quiz-section" class="nav-chip">اختبار العقدة النفسية</a>
+                <a href="#footer-credits" class="nav-chip">فريق الإعداد</a>
             </nav>
         </div>
     </header>
 
-    <!-- =====================================================================
-         MAIN CONTENT
-         ===================================================================== -->
-    <main id="top" class="relative z-10">
+    <!-- ==========================================================================
+         1. القسم الافتتاحي + محاكاة غلاف الكتاب ثلاثي الأبعاد
+         ========================================================================== -->
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="hero-grid">
 
-        <!-- HERO SECTION WITH INTERACTIVE 3D BOOK COVER MOCKUP -->
-        <section class="relative pt-8 pb-16 sm:pt-14 sm:pb-24 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+                    <!-- العمود الأيمن: العنوان، توثيق القارئين، وفلسفة الكتاب -->
+                    <div class="hero-content">
+                        <div class="author-badge">
+                            <span style="color: #ff2a55;">✦</span>
+                            <span>دراسة وتحليل شامل لكتاب الدكتور <strong>يوسف الحسني</strong></span>
+                        </div>
 
-                    <!-- 3D HARDCOVER BOOK MOCKUP (Shown First on Mobile for Immediate Visual Impact!) -->
-                    <div class="lg:col-span-5 flex flex-col items-center justify-center order-1 lg:order-2">
-                        <div id="bookStage" class="book-stage book-float-container py-2 sm:py-4">
-                            <div id="book3dObject" class="book-3d-wrapper" title="انقر لفتح الكتاب وتصفح الفصول">
+                        <h1 class="hero-title font-cover">
+                            عُقَدُكَ النَّفْسِيَّةُ
+                            <span class="crimson-word">سِجْنُكَ الأَبَدِيُّ</span>
+                        </h1>
 
-                                <!-- FRONT HARDCOVER FACE (Faithful Iconic Cover Art) -->
-                                <div class="book-front-cover">
-                                    <!-- Subtle Red Ink Splatter Accent Top Left -->
-                                    <svg class="absolute -top-6 -left-6 w-32 h-32 sm:w-36 sm:h-36 opacity-40 pointer-events-none" viewBox="0 0 120 120" fill="none">
-                                        <circle cx="28" cy="28" r="18" fill="#C8102E"/>
-                                        <circle cx="52" cy="18" r="6" fill="#E61938"/>
-                                        <circle cx="18" cy="56" r="5" fill="#C8102E"/>
-                                        <path d="M25 25 Q45 42 62 35" stroke="#E61938" stroke-width="3" stroke-linecap="round"/>
-                                    </svg>
+                        <!-- شارة القارئين قيس الجازي وراما العرايضة -->
+                        <div class="readers-hero-card">
+                            <div class="readers-hero-icon">📖</div>
+                            <div>
+                                <div class="readers-hero-label">الموسوعة التفاعلية الكاملة للكتاب</div>
+                                <div class="readers-hero-names">
+                                    إعداد القارئين: <span>قيس الجازي</span> و<span>راما العرايضة</span>
+                                </div>
+                            </div>
+                        </div>
 
-                                    <!-- Top Cover Typography: Iconic Title -->
-                                    <div class="relative z-10 text-center pt-1">
-                                        <div class="text-[9px] sm:text-[10px] tracking-[0.18em] text-[#CFC9BE]/85 font-bold mb-1">
-                                            دراسة في أعماق النفس البشرية
-                                        </div>
-                                        <div class="font-cover text-2xl sm:text-[33px] font-bold text-[#F5F5F7] leading-tight">
+                        <p class="hero-desc">
+                            هل تساءلت يوماً لماذا نكرر نفس الأخطاء في علاقاتنا؟ ولماذا نشعر بالذنب حين نختار راحتنا؟ يكشف هذا الكتاب كيف تتحول <strong>برمجة الطفولة، وسطوة المجتمع، والجروح غير المشفية</strong> إلى قضبان غير مرئية تحبس الإنسان داخل نسخة مزيّفة من ذاته، ويقدّم خارطة طريق عملية لكسر تلك القضبان.
+                        </p>
+
+                        <div class="hero-buttons">
+                            <a href="#chapters-section" class="btn-primary">
+                                <span>تصفّح الفصول التسعة</span>
+                                <span>↓</span>
+                            </a>
+                            <a href="#quotes-section" class="btn-secondary">
+                                <span>معرض الاقتباسات الخالدة (18)</span>
+                                <span>❝</span>
+                            </a>
+                        </div>
+
+                        <div class="hero-stats">
+                            <div class="stat-box">
+                                <div class="stat-num font-cover">9 فصول</div>
+                                <div class="stat-label">شرح واقتباس ونصيحة وفائدة</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-num font-cover">18 اقتباساً</div>
+                                <div class="stat-label">بتصميم بطاقات غلاف الكتاب</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-num font-cover">5 أسئلة</div>
+                                <div class="stat-label">بوصلة تشخيص القيد النفسي</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- العمود الأيسر: مجسم غلاف الكتاب ثلاثي الأبعاد بوجهين (أمامي وخلفي) -->
+                    <div class="book-showcase-col">
+                        <div class="book-scene">
+                            <div id="book3D" class="book-3d" title="انقر لقلب الكتاب وقراءة الغلاف الخلفي">
+
+                                <!-- الوجه الأمامي للغلاف (يحاكي غلاف الكتاب الأصلي) -->
+                                <div class="book-face-front">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 0.68rem; color: #cbd5e1; letter-spacing: 1px;">الأكثر مبيعاً في التحليل النفسي</div>
+                                        <div class="font-cover" style="font-size: 2rem; font-weight: 700; color: #ffffff; line-height: 1.2; margin-top: 4px;">
                                             عُقَدُكَ النَّفْسِيَّةُ
                                         </div>
-                                        <div class="font-cover text-2xl sm:text-[35px] font-bold text-[#E61938] leading-tight mt-0.5 drop-shadow-[0_0_16px_rgba(230,25,56,0.7)]">
+                                        <div class="font-cover" style="font-size: 2.1rem; font-weight: 700; color: #ff2a55; line-height: 1.2; text-shadow: 0 0 18px rgba(255,42,85,0.7);">
                                             سِجْنُكَ الأَبَدِيُّ
                                         </div>
                                     </div>
 
-                                    <!-- Centerpiece Cover SVG Artwork: Human Head Silhouette + Red/White Prison Bars + Keyhole + Escaping Crimson Bird -->
-                                    <div class="relative z-10 flex-1 flex items-center justify-center my-1">
-                                        <svg viewBox="0 0 260 250" class="w-full h-full max-h-[205px] sm:max-h-[245px]" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <clipPath id="headSilhouetteClip">
-                                                    <path d="M115 232 C115 206, 98 197, 92 178 C80 173, 73 162, 81 151 C72 140, 78 125, 90 118 C87 72, 120 35, 166 35 C214 35, 246 72, 242 118 C239 156, 220 182, 208 204 L208 232 Z" />
-                                                </clipPath>
-                                                <radialGradient id="coverCrimsonBacklight" cx="50%" cy="50%" r="50%">
-                                                    <stop offset="0%" stop-color="#E61938" stop-opacity="0.48"/>
-                                                    <stop offset="70%" stop-color="#8f0c20" stop-opacity="0.12"/>
-                                                    <stop offset="100%" stop-color="#09090C" stop-opacity="0"/>
-                                                </radialGradient>
-                                            </defs>
-
-                                            <!-- Crimson Glow Behind Head -->
-                                            <circle cx="155" cy="130" r="105" fill="url(#coverCrimsonBacklight)" />
-
-                                            <!-- Human Head Silhouette Base -->
-                                            <path d="M115 232 C115 206, 98 197, 92 178 C80 173, 73 162, 81 151 C72 140, 78 125, 90 118 C87 72, 120 35, 166 35 C214 35, 246 72, 242 118 C239 156, 220 182, 208 204 L208 232 Z"
-                                                  fill="#121218" stroke="#C8102E" stroke-width="2.2" />
-
-                                            <!-- Vertical Prison Bars (Alternating Red & Ivory White) Clipped Inside Head -->
-                                            <g clip-path="url(#headSilhouetteClip)">
-                                                <line x1="102" y1="30" x2="102" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.88" />
-                                                <line x1="120" y1="30" x2="120" y2="235" stroke="#C8102E" stroke-width="3.8" />
-                                                <line x1="138" y1="30" x2="138" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.9" />
-                                                <!-- Central Fractured Bars around Keyhole -->
-                                                <line x1="156" y1="30" x2="156" y2="92" stroke="#E61938" stroke-width="4" />
-                                                <line x1="156" y1="158" x2="156" y2="235" stroke="#E61938" stroke-width="4" />
-                                                <line x1="174" y1="30" x2="174" y2="98" stroke="#F5F5F7" stroke-width="3.2" opacity="0.88" />
-                                                <line x1="174" y1="154" x2="174" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.88" />
-                                                <line x1="192" y1="30" x2="192" y2="235" stroke="#C8102E" stroke-width="3.8" />
-                                                <line x1="210" y1="30" x2="210" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.82" />
-                                                <line x1="228" y1="30" x2="228" y2="235" stroke="#C8102E" stroke-width="3.5" />
-
-                                                <!-- Keyhole Void inside the Mind -->
-                                                <circle cx="164" cy="116" r="14" fill="#060608" stroke="#E61938" stroke-width="2.5" />
-                                                <path d="M156 126 L172 126 L176 152 L152 152 Z" fill="#060608" stroke="#E61938" stroke-width="2.2" />
-                                            </g>
-
-                                            <!-- Crimson Ink Strokes & Shattered Fragments Breaking Left -->
-                                            <g fill="#E61938">
-                                                <circle cx="66" cy="105" r="3.5" />
-                                                <circle cx="52" cy="92" r="2.2" />
-                                                <circle cx="72" cy="84" r="2.5" />
-                                                <polygon points="132,102 122,94 126,107" />
-                                                <polygon points="135,142 123,148 131,152" />
-                                            </g>
-
-                                            <!-- Soaring Crimson Bird Escaping from the Mind's Keyhole -->
-                                            <g class="cover-bird-anim">
-                                                <path d="M44 74 C66 56, 86 68, 98 84 C112 64, 134 52, 158 64 C132 70, 114 84, 100 102 C86 86, 68 76, 44 74 Z"
-                                                      fill="#E61938" stroke="#F5F5F7" stroke-width="1" />
-                                                <path d="M88 88 L72 98 L94 94 Z" fill="#F5F5F7" />
-                                            </g>
+                                    <!-- رسم الغلاف الفني: رأس إنسان من قضبان السجن مع ثقب مفتاح وطيور قرمزية متحررة -->
+                                    <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin: 6px 0;">
+                                        <svg viewBox="0 0 240 220" style="width: 100%; max-height: 215px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="135" cy="115" r="85" fill="rgba(225, 29, 72, 0.16)" />
+                                            <!-- حدود رأس الإنسان -->
+                                            <path d="M98 205 C98 182, 82 174, 76 156 C66 151, 60 142, 68 132 C60 122, 65 108, 76 102 C73 60, 104 28, 145 28 C188 28, 216 60, 212 102 C209 136, 192 160, 182 180 L182 205 Z"
+                                                  fill="#111118" stroke="#e11d48" stroke-width="2.5" />
+                                            <!-- قضبان السجن داخل العقل -->
+                                            <line x1="95" y1="42" x2="95" y2="195" stroke="#f8fafc" stroke-width="3" opacity="0.85" />
+                                            <line x1="112" y1="34" x2="112" y2="198" stroke="#e11d48" stroke-width="3.5" />
+                                            <line x1="129" y1="30" x2="129" y2="200" stroke="#f8fafc" stroke-width="3" opacity="0.9" />
+                                            <line x1="146" y1="30" x2="146" y2="82" stroke="#ff2a55" stroke-width="3.8" />
+                                            <line x1="146" y1="142" x2="146" y2="202" stroke="#ff2a55" stroke-width="3.8" />
+                                            <line x1="163" y1="34" x2="163" y2="86" stroke="#f8fafc" stroke-width="3" opacity="0.85" />
+                                            <line x1="163" y1="140" x2="163" y2="200" stroke="#f8fafc" stroke-width="3" opacity="0.85" />
+                                            <line x1="180" y1="42" x2="180" y2="190" stroke="#e11d48" stroke-width="3.5" />
+                                            <line x1="196" y1="58" x2="196" y2="165" stroke="#f8fafc" stroke-width="2.8" opacity="0.8" />
+                                            <!-- ثقب المفتاح المضيء في مركز الوعي -->
+                                            <circle cx="154" cy="102" r="13" fill="#07070a" stroke="#ff2a55" stroke-width="2.5" />
+                                            <path d="M147 112 L161 112 L165 136 L143 136 Z" fill="#07070a" stroke="#ff2a55" stroke-width="2.2" />
+                                            <!-- الطائر القرمزي المتحرر من القضبان -->
+                                            <path d="M32 64 C52 48, 70 58, 82 72 C94 54, 114 44, 136 54 C114 60, 98 72, 84 88 C72 74, 54 66, 32 64 Z"
+                                                  fill="#ff2a55" stroke="#ffffff" stroke-width="1" />
+                                            <circle cx="52" cy="92" r="3" fill="#ff2a55" />
+                                            <circle cx="66" cy="80" r="2.2" fill="#f8fafc" />
                                         </svg>
                                     </div>
 
-                                    <!-- Bottom Cover: Author Name & Reader Edition Seal -->
-                                    <div class="relative z-10 text-center space-y-1.5 border-t border-[#8f0c20]/60 pt-2">
-                                        <div class="font-serif text-base sm:text-xl font-bold text-[#F5F5F7] tracking-wide">
-                                            د. يوسف الحسني
-                                        </div>
-                                        <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#2b040a] border border-[#C8102E]/75 text-[9.5px] sm:text-[11px] font-bold text-[#F5F5F7]">
-                                            إعداد القارئين: <span class="text-[#E61938]">قيس الجازي وراما العرايضة</span>
+                                    <div style="text-align: center; border-top: 1px solid rgba(225,29,72,0.5); padding-top: 8px;">
+                                        <div class="font-serif-ar" style="font-size: 1.1rem; font-weight: 700; color: #fff;">د. يوسف الحسني</div>
+                                        <div style="margin-top: 4px; padding: 3px 10px; border-radius: 999px; background: #28050d; border: 1px solid #e11d48; font-size: 0.68rem; font-weight: 800; color: #f8fafc; display: inline-block;">
+                                            إعداد القارئين: <span style="color: #ff2a55;">قيس الجازي وراما العرايضة</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- RIGHT SPINE (كعب الكتاب) -->
-                                <div class="book-spine">
-                                    <span class="book-spine-text">عُقدك النفسية سجنك الأبدي • د. يوسف الحسني</span>
+                                <!-- الوجه الخلفي للغلاف (يظهر عند الضغط على زر قلب الكتاب) -->
+                                <div class="book-face-back">
+                                    <div>
+                                        <div style="font-size: 0.75rem; font-weight: 800; color: #ff2a55; margin-bottom: 6px;">كلمة الغلاف الخلفي</div>
+                                        <h3 class="font-cover" style="font-size: 1.35rem; color: #fff; margin-bottom: 12px;">لماذا تبقى عُقدنا سجننا الأبدي؟</h3>
+                                        <p class="font-serif-ar" style="font-size: 0.95rem; color: #e2e8f0; line-height: 1.75;">
+                                            «أخطر السجون ليست تلك المشيّدة بالحجارة والحديد، بل تلك التي شُيّدت داخل عقولنا من خوف الطفولة، ووصايا المجتمع، وعلاقات الاستنزاف. هذا الكتاب ليس مجرد قراءة، بل هو مفتاح زنزانتك النفسية.»
+                                        </p>
+                                    </div>
+
+                                    <div style="background: rgba(225,29,72,0.12); border: 1px solid rgba(225,29,72,0.45); border-radius: 12px; padding: 12px; text-align: center;">
+                                        <div style="font-size: 0.72rem; color: #f59e0b; font-weight: 800;">إعداد وتلخيص ومراجعة</div>
+                                        <div class="font-cover" style="font-size: 1.05rem; color: #fff; font-weight: 700; margin-top: 2px;">
+                                            قيس الجازي &amp; راما العرايضة
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <!-- LEFT PAPER PAGE EDGES (حواف الصفحات) -->
-                                <div class="book-pages-edge"></div>
-
-                                <!-- BACK COVER -->
-                                <div class="book-back-cover"></div>
+                                <!-- كعب الكتاب وحواف الصفحات -->
+                                <div class="book-spine-3d">
+                                    <span>عُقدك النفسية سجنك الأبدي • د. يوسف الحسني</span>
+                                </div>
+                                <div class="book-pages-3d"></div>
                             </div>
-
-                            <!-- Ambient Crimson Floor Shadow -->
-                            <div class="book-floor-shadow"></div>
                         </div>
 
-                        <!-- Interactive Book Angle Toggle -->
-                        <div class="flex items-center gap-3 mt-1">
-                            <button id="toggleBookAngleBtn" type="button" class="px-4 py-1.5 rounded-full bg-[#0D0D11] hover:bg-[#2b040a] border border-[#8f0c20]/65 text-xs font-bold text-[#E5E2DC] transition-colors cursor-pointer">
-                                تبديل زاوية عرض الغلاف ↻
+                        <div class="book-shadow-base"></div>
+
+                        <div class="book-controls">
+                            <button type="button" id="flipBookBtn" class="btn-book-control">
+                                اقلب الكتاب لقراءة الغلاف الخلفي ↻
                             </button>
-                            <span class="text-[11px] text-[#CFC9BE]/75">انقر على الكتاب لفتحه</span>
-                        </div>
-                    </div>
-
-                    <!-- HERO TYPOGRAPHY, MANDATORY READER CREDITS & CTAs -->
-                    <div class="lg:col-span-7 text-right space-y-5 sm:space-y-6 order-2 lg:order-1">
-                        <!-- Author & Edition Tag -->
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D0D11] border border-[#8f0c20]/70 text-xs sm:text-sm font-bold text-[#E5E2DC] shadow-lg">
-                            <span class="text-[#E61938]">✦</span>
-                            <span>قراءة تحليلية شاملة في كتاب الدكتور <strong class="text-white">يوسف الحسني</strong></span>
-                        </div>
-
-                        <!-- Iconic Cover-Matched Title -->
-                        <h1 class="font-cover text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.24] tracking-wide">
-                            <span class="block text-[#F5F5F7] drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">عُقَدُكَ النَّفْسِيَّةُ</span>
-                            <span class="block text-[#E61938] mt-1.5 drop-shadow-[0_0_28px_rgba(230,25,56,0.55)]">سِجْنُكَ الأَبَدِيُّ</span>
-                        </h1>
-
-                        <!-- Mandatory Prominent Reader Credit Plate -->
-                        <div>
-                            <div class="inline-flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl matte-hardcover-bg border-2 border-[#C8102E]/80 shadow-crimson-glow">
-                                <div class="w-10 h-10 rounded-xl bg-[#C8102E]/20 border border-[#E61938]/60 flex items-center justify-center text-[#E61938] shrink-0">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-3.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[11px] font-bold text-[#E61938] tracking-wide">الطبعة التحليلية التفاعلية</p>
-                                    <p class="text-sm sm:text-lg md:text-xl font-black text-white leading-snug">
-                                        إعداد القارئين: <span class="text-[#E61938]">قيس الجازي</span> و<span class="text-[#E61938]">راما العرايضة</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Evocative Summary -->
-                        <p class="text-sm sm:text-lg text-[#E5E2DC]/90 leading-relaxed max-w-2xl font-medium">
-                            بين دفتي هذا الكتاب الأسود تتكشف القضبان الخفية التي صيغت في طفولتنا وبقيت تحكم اختياراتنا وعلاقاتنا. تصفّح <strong class="text-white">الفصول التسعة الكاملة</strong> بشروحاتها النفسية ونصائحها وفوائدها، وغُص في <strong class="text-[#E61938]">معرض الاقتباسات الخالدة</strong> المصمم بروح غلاف الكتاب الأصلي.
-                        </p>
-
-                        <!-- Action Buttons -->
-                        <div class="flex flex-wrap items-center gap-3.5 pt-1">
-                            <button id="openBookHeroBtn" type="button" class="group relative inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-l from-[#E61938] via-[#C8102E] to-[#8f0c20] text-white font-extrabold text-sm sm:text-lg shadow-crimson-intense hover:scale-[1.02] active:scale-95 transition-all cursor-pointer overflow-hidden">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                <span>افتح الكتاب وتصفح الفصول</span>
-                            </button>
-
-                            <a href="#quotes-gallery-section" class="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl bg-[#0D0D11] hover:bg-[#2b040a]/80 border border-[#C8102E]/65 hover:border-[#E61938] text-[#F5F5F7] hover:text-white font-bold text-sm sm:text-base transition-all">
-                                <span class="text-[#E61938] text-lg leading-none">❝</span>
-                                <span>معرض الاقتباسات (24)</span>
-                            </a>
-                        </div>
-
-                        <!-- Book Metadata Strip -->
-                        <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-5 border-t border-[#5c0815]/50 max-w-lg">
-                            <div>
-                                <div class="font-cover text-xl sm:text-3xl font-bold text-white">٩ فصول</div>
-                                <div class="text-[11px] sm:text-sm text-[#CFC9BE]">تشريح نفسي كامل</div>
-                            </div>
-                            <div>
-                                <div class="font-cover text-xl sm:text-3xl font-bold text-[#E61938]">٢٤ اقتباساً</div>
-                                <div class="text-[11px] sm:text-sm text-[#CFC9BE]">درر من داخل الكتاب</div>
-                            </div>
-                            <div>
-                                <div class="font-cover text-xl sm:text-3xl font-bold text-white">٥ أسئلة</div>
-                                <div class="text-[11px] sm:text-sm text-[#CFC9BE]">مقياس كشف القيد</div>
-                            </div>
                         </div>
                     </div>
 
@@ -681,174 +1320,43 @@
             </div>
         </section>
 
-        <!-- =====================================================================
-             BOOK PHILOSOPHY & HARDCOVER OVERVIEW
-             ===================================================================== -->
-        <section id="about-book" class="py-14 sm:py-20 border-t border-[#5c0815]/50 bg-[#0D0D11]/85 backdrop-blur-md">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="book-page-card rounded-3xl p-6 sm:p-12 reveal-item">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div class="lg:col-span-8 space-y-4">
-                            <div class="inline-flex items-center gap-2 text-xs font-extrabold tracking-widest text-[#E61938]">
-                                <span class="w-7 h-[2px] bg-[#E61938]"></span>
-                                <span>بطاقة تعريف الكتاب</span>
-                            </div>
-                            <h2 class="font-cover text-2xl sm:text-4xl font-bold text-white leading-snug">
-                                سجنٌ لا جدران له.. مفاتيحه في وعيك!
-                            </h2>
-                            <p class="text-[#E5E2DC] text-sm sm:text-lg leading-relaxed">
-                                يُعدّ كتاب <strong class="text-white">«عُقدك النفسية سجنك الأبدي»</strong> للدكتور <strong class="text-[#E61938]">يوسف الحسني</strong> مرآةً صادقة ومواجهة جريئة مع الذات، حيث يكشف كيف تتحول تجارب الطفولة القاسية، وضغوط المجتمع، وثقافة العار، والتعلق المرضي إلى قضبان غير مرئية تحبس الإنسان داخل نسخة مزيّفة من نفسه.
-                            </p>
-                            <p class="text-[#CFC9BE] text-xs sm:text-base leading-relaxed">
-                                قام القارئان <strong class="text-white">قيس الجازي وراما العرايضة</strong> بإعداد هذه المنصة المعرفية لتضم خلاصة الفصول التسعة بأسلوب منهجي (الاقتباس، الشرح، النصيحة، والفائدة)، إلى جانب معرض شامل لأجمل الاقتباسات الخالدة داخل الكتاب.
-                            </p>
-                        </div>
-
-                        <div class="lg:col-span-4 grid grid-cols-1 gap-3.5">
-                            <div class="p-4 sm:p-5 rounded-2xl bg-[#060608] border border-[#8f0c20]/55">
-                                <div class="text-[#E61938] font-black text-sm sm:text-base mb-1">٠١. كشف الأقنعة</div>
-                                <p class="text-xs sm:text-sm text-[#CFC9BE] leading-relaxed">فهم الحيل الدفاعية التي يمارسها اللاوعي للهروب من مواجهة الجروح القديمة.</p>
-                            </div>
-                            <div class="p-4 sm:p-5 rounded-2xl bg-[#060608] border border-[#8f0c20]/55">
-                                <div class="text-[#E61938] font-black text-sm sm:text-base mb-1">٠٢. تفكيك البرمجة</div>
-                                <p class="text-xs sm:text-sm text-[#CFC9BE] leading-relaxed">التمييز بين صوتك الحقيقي وبين أحكام المجتمع والأسرة الموروثة.</p>
-                            </div>
-                            <div class="p-4 sm:p-5 rounded-2xl bg-[#060608] border border-[#8f0c20]/55">
-                                <div class="text-[#E61938] font-black text-sm sm:text-base mb-1">٠٣. التحرر الواعي</div>
-                                <p class="text-xs sm:text-sm text-[#CFC9BE] leading-relaxed">تحويل الألم إلى وعي وبناء علاقات قائمة على الحرية والاستحقاق الصحي.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================================
-             SECTION: ALL 9 CHAPTERS OF THE BOOK
-             ===================================================================== -->
-        <section id="chapters-section" class="py-14 sm:py-24 border-t border-[#5c0815]/50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <!-- Header & Search -->
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 reveal-item">
-                    <div class="space-y-2">
-                        <div class="inline-flex items-center gap-2 text-xs font-extrabold text-[#E61938]">
-                            <span class="w-7 h-[2px] bg-[#E61938]"></span>
-                            <span>صفحات الكتاب التحليلية</span>
-                        </div>
-                        <h2 class="font-cover text-3xl sm:text-5xl font-bold text-white">
-                            فصول الكتاب التسعة
-                        </h2>
-                        <p class="text-[#CFC9BE] text-sm sm:text-base max-w-2xl">
-                            لكل فصل من الكتاب: <strong class="text-[#E61938]">اقتباس محوري</strong>، <strong class="text-white">شرح نفسي معمّق</strong>، <strong class="text-[#E61938]">نصيحة عملية</strong>، و<strong class="text-white">الفائدة المرجوة</strong>.
-                        </p>
-                    </div>
-
-                    <!-- Chapter Search Box -->
-                    <div class="w-full lg:w-96">
-                        <div class="relative">
-                            <input
-                                type="text"
-                                id="chapterSearchInput"
-                                placeholder="ابحث في الفصول التسعة أو الشروحات..."
-                                class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[#0D0D11] border border-[#8f0c20]/65 focus:border-[#E61938] focus:ring-2 focus:ring-[#E61938]/25 text-white placeholder-[#CFC9BE]/45 text-sm outline-none transition-all"
-                            />
-                            <svg class="w-5 h-5 text-[#E61938] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chapter Filter Pills -->
-                <div id="chapter-filter-pills" class="flex flex-wrap items-center gap-2 mb-10 reveal-item">
-                    <button type="button" data-filter="all" class="chapter-pill active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#C8102E] text-white shadow-crimson-glow transition-all cursor-pointer">
-                        جميع الفصول (9)
-                    </button>
-                    <button type="button" data-filter="awareness" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/55 text-[#E5E2DC] hover:border-[#E61938] transition-all cursor-pointer">
-                        الوعي والطفولة
-                    </button>
-                    <button type="button" data-filter="society" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/55 text-[#E5E2DC] hover:border-[#E61938] transition-all cursor-pointer">
-                        المجتمع والعار والرفض
-                    </button>
-                    <button type="button" data-filter="relationships" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/55 text-[#E5E2DC] hover:border-[#E61938] transition-all cursor-pointer">
-                        العلاقات والذات والأقنعة
-                    </button>
-                    <button type="button" data-filter="liberation" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/55 text-[#E5E2DC] hover:border-[#E61938] transition-all cursor-pointer">
-                        كسر القضبان والتحرر
-                    </button>
-                </div>
-
-                <!-- Empty Chapter Search State -->
-                <div id="empty-chapter-state" class="hidden text-center py-14 book-page-card rounded-3xl">
-                    <div class="text-4xl mb-3">📖</div>
-                    <h3 class="text-xl font-bold text-white mb-2">لا يوجد فصل يطابق عبارة البحث</h3>
-                    <p class="text-[#CFC9BE] text-sm mb-5">جرّب البحث بكلمات مثل: القطيع، العار، الطفولة، التعلق، النقص، أو التحرر.</p>
-                    <button id="resetChapterSearchBtn" type="button" class="px-5 py-2.5 rounded-xl bg-[#C8102E] text-white text-sm font-bold cursor-pointer">
-                        إظهار الفصول التسعة
-                    </button>
-                </div>
-
-                <!-- Chapters Grid -->
-                <div id="chapters-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-7">
-                    <!-- Populated via JavaScript immediately -->
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================================
-             DEDICATED SECTION: «معرض الاقتباسات الخالدة من الكتاب» (24 Quotes)
-             ===================================================================== -->
-        <section id="quotes-gallery-section" class="py-14 sm:py-24 border-t border-[#5c0815]/60 bg-[#09090D]/95 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <!-- Section Header -->
-                <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-item">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2b040a] border border-[#C8102E]/65 text-[#E61938] text-xs font-extrabold">
-                        <span>❝</span>
-                        <span>مختارات من بين سطور الكتاب</span>
-                        <span>❞</span>
-                    </div>
-                    <h2 class="font-cover text-3xl sm:text-5xl font-bold text-white leading-snug">
-                        معرض الاقتباسات الخالدة من الكتاب
-                    </h2>
-                    <p class="text-[#CFC9BE] text-sm sm:text-base leading-relaxed">
-                        أجمل وأعمق ٢٤ اقتباساً منتقى بعناية من صفحات كتاب <strong class="text-white">«عُقدك النفسية سجنك الأبدي»</strong>. يمكنك نسخ أي اقتباس فوراً أو معاينته داخل <strong class="text-[#E61938]">بطاقة غلاف الكتاب المصغرة</strong> بتوقيع القارئين.
+        <!-- ==========================================================================
+             2. قسم الفصول التسعة الكاملة (مكتوبة بالكامل داخل HTML لضمان الظهور الفوري)
+             ========================================================================== -->
+        <section id="chapters-section" class="section-block">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">التشريح النفسي الكامل للكتاب</span>
+                    <h2 class="section-title font-cover">فصول الكتاب التسعة (شرح واقتباس ونصيحة وفائدة)</h2>
+                    <p class="section-subtitle">
+                        إعداد وتلخيص القارئين <strong>قيس الجازي وراما العرايضة</strong> — كل فصل يضم اقتباساً مختاراً، وشرحاً نفسياً معمقاً، ونصيحة عملية، وفائدة التحرر.
                     </p>
                 </div>
 
-                <!-- Quotes Search & Topic Filter Controls -->
-                <div class="book-page-card rounded-3xl p-4 sm:p-6 mb-9 space-y-4 reveal-item">
-                    <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5">
-                        <!-- Search inside Quotes -->
-                        <div class="relative flex-1">
-                            <input
-                                type="text"
-                                id="quoteSearchInput"
-                                placeholder="ابحث داخل الاقتباسات (مثال: الحرية، الخوف، الطفولة، القطيع، الحب)..."
-                                class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[#060608] border border-[#8f0c20]/65 focus:border-[#E61938] focus:ring-2 focus:ring-[#E61938]/25 text-white placeholder-[#CFC9BE]/45 text-sm outline-none transition-all"
-                            />
-                            <svg class="w-5 h-5 text-[#E61938] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-
-                        <!-- Live Quotes Counter -->
-                        <div class="flex items-center justify-between md:justify-end gap-3 px-4 py-2.5 rounded-2xl bg-[#060608] border border-[#5c0815]/55 text-xs sm:text-sm font-bold text-[#E5E2DC] shrink-0">
-                            <span>الاقتباسات المعروضة:</span>
-                            <span id="quotesCountBadge" class="px-2.5 py-0.5 rounded-lg bg-[#C8102E] text-white font-black">24</span>
-                        </div>
+                <!-- أدوات البحث والتصفية للفصول -->
+                <div class="toolbar-box">
+                    <div class="search-row">
+                        <input type="text" id="chapterSearch" class="search-input" placeholder="ابحث في الفصول التسعة (مثال: الطفولة، الذنب، العلاقات، القطيع، الكمالية)..." />
                     </div>
+                    <div class="filter-pills">
+                        <button type="button" class="filter-btn ch-filter-btn active" data-ch-cat="all">جميع الفصول (9)</button>
+                        <button type="button" class="filter-btn ch-filter-btn" data-ch-cat="childhood">الطفولة والنشأة</button>
+                        <button type="button" class="filter-btn ch-filter-btn" data-ch-cat="self">الذات والكمالية والذنب</button>
+                        <button type="button" class="filter-btn ch-filter-btn" data-ch-cat="relations">العلاقات والمجتمع</button>
+                        <button type="button" class="filter-btn ch-filter-btn" data-ch-cat="freedom">التفكير والتحرر</button>
+                    </div>
+                </div>
 
-                    <!-- Topic Filter Pills -->
-                    <div id="quote-filter-pills" class="flex flex-wrap items-center gap-2">
-                        <button type="button" data-qfilter="all" class="quote-pill active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#C8102E] text-white shadow-crimson-glow transition-all cursor-pointer">
-                            الكل (24)
-                        </button>
-                        <button type="button" data-qfilter="knot" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/55 text-[#E5E2DC] hover:border-[#E61938] transition-all cursor-pointer">
-                            العقدة النفسية
-                        </button>
-                        <button type="button" data-qfilter="society" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/55 text-[#E5E2DC] hover:border-[#E61938] transition-all cursor-pointer">
-                            المجتمع والقطيع
-                        </button>
-                        <button type="button" data-qfilter="shame" class="quote-pill px-3.5 py-2
+                <!-- شبكة الفصول التسعة (Hardcoded directly in HTML) -->
+                <div id="chaptersGrid" class="chapters-grid">
+
+                    <!-- الفصل الأول -->
+                    <article class="chapter-card" data-category="childhood">
+                        <div class="chapter-card-top">
+                            <div>
+                                <div class="chapter-badge-row">
+                                    <span class="ch-num-badge">الفصل الأول</span>
+                                    <span class="ch-cat-badge">الطفولة والبرمجة</span>
+                                </div>
+                                <h3 class="chapter-title font-cover">صدمات الطفولة والبرمجة الأولى</h3>
+                                <p class="chapter-subtitle">كيف يُبنى السجن النفسي في السنوات

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عُقدك النفسية سجنك الأبدي | إعداد القارئين: قيس الجازي وراما العرايضة</title>
+
+    <!-- Google Fonts: Aref Ruqaa & Amiri for Iconic Book Cover Typography, Tajawal for Crisp Body Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                        serif: ['Amiri', 'serif'],
+                        cover: ['Aref Ruqaa', 'Amiri', 'serif'],
+                    },
+                    colors: {
+                        void: {
+                            950: '#060608',
+                            900: '#0D0D11',
+                            850: '#121217',
+                            800: '#18181F',
+                        },
+                        blood: {
+                            950: '#2b040a',
+                            900: '#5c0815',
+                            800: '#8f0c20',
+                            700: '#C8102E',
+                            600: '#E61938',
+                            500: '#ff2a4b',
+                        },
+                        ivory: {
+                            50: '#FAF9F6',
+                            100: '#F5F5F7',
+                            200: '#E5E2DC',
+                            300: '#CFC9BE',
+                        }
+                    },
+                    boxShadow: {
+                        'crimson-glow': '0 0 28px rgba(200, 16, 46, 0.38)',
+                        'crimson-intense': '0 0 50px rgba(230, 25, 56, 0.55)',
+                        'hardcover': '0 30px 70px rgba(0, 0, 0, 0.92), 0 0 35px rgba(200, 16, 46, 0.22)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-matte-black: #060608;
+            --bg-cover-surface: #0D0D11;
+            --crimson-primary: #C8102E;
+            --crimson-vivid: #E61938;
+            --ivory-ink: #F5F5F7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-matte-black);
+            color: var(--ivory-ink);
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: rgba(200, 16, 46, 0.45);
+            color: #ffffff;
+        }
+
+        /* Custom Crimson Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060608;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #8f0c20, #E61938);
+            border-radius: 999px;
+        }
+
+        /* Top Crimson Reading Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #E61938, #C8102E, #8f0c20);
+            box-shadow: 0 0 14px #E61938;
+            z-index: 9999;
+            transition: width 0.08s ease-out;
+        }
+
+        /* Interactive Canvas Background */
+        #prisonCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Matte Hardcover Book Grain & Chiaroscuro Spotlight */
+        .matte-hardcover-bg {
+            background-color: #0D0D11;
+            background-image:
+                radial-gradient(circle at 30% 20%, rgba(200, 16, 46, 0.14) 0%, transparent 55%),
+                radial-gradient(circle at 80% 85%, rgba(200, 16, 46, 0.09) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 3px),
+                repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.25) 0px, rgba(0, 0, 0, 0.25) 1px, transparent 1px, transparent 3px);
+        }
+
+        .ambient-chiaroscuro {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 18%, rgba(200, 16, 46, 0.13) 0%, rgba(6, 6, 8, 0.82) 65%, #060608 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* =========================================================
+           3D REALISTIC ARABIC HARDCOVER BOOK MOCKUP (RTL)
+           Spine on the Right, Paper Page Edges on the Left
+           ========================================================= */
+        .book-stage {
+            perspective: 1600px;
+        }
+
+        .book-3d-wrapper {
+            position: relative;
+            width: 300px;
+            height: 455px;
+            transform-style: preserve-3d;
+            transform: rotateY(18deg) rotateX(4deg);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+        }
+
+        @media (min-width: 640px) {
+            .book-3d-wrapper {
+                width: 340px;
+                height: 515px;
+            }
+        }
+
+        .book-3d-wrapper.front-flat {
+            transform: rotateY(0deg) rotateX(0deg) !important;
+        }
+
+        /* Front Hardcover Face */
+        .book-front-cover {
+            position: absolute;
+            inset: 0;
+            border-radius: 6px 14px 14px 6px;
+            background-color: #09090C;
+            background-image:
+                radial-gradient(circle at 50% 42%, rgba(200, 16, 46, 0.22) 0%, rgba(13, 13, 17, 0.95) 68%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 2px);
+            border: 1.5px solid rgba(200, 16, 46, 0.45);
+            box-shadow:
+                inset 0 0 35px rgba(0, 0, 0, 0.95),
+                inset -4px 0 10px rgba(255, 255, 255, 0.06),
+                -22px 28px 55px rgba(0, 0, 0, 0.92),
+                0 0 40px rgba(200, 16, 46, 0.25);
+            transform: translateZ(22px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 22px 22px 18px 22px;
+        }
+
+        /* Hardcover Hinge Groove near Right Spine */
+        .book-front-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 14px;
+            width: 3px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.85), rgba(255,255,255,0.08), rgba(0,0,0,0.9));
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* Right Side Spine (كعب الكتاب العربي) */
+        .book-spine {
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            right: -22px;
+            width: 44px;
+            background: linear-gradient(90deg, #070709 0%, #16161d 35%, #0a0a0e 75%, #2b040a 100%);
+            border-top: 1px solid rgba(200, 16, 46, 0.5);
+            border-bottom: 1px solid rgba(200, 16, 46, 0.5);
+            transform: rotateY(90deg);
+            transform-origin: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.9);
+        }
+
+        .book-spine-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Amiri', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #F5F5F7;
+            white-space: nowrap;
+        }
+
+        /* Left Side Paper Page Block (حواف الصفحات الورقية) */
+        .book-pages-edge {
+            position: absolute;
+            top: 6px;
+            bottom: 6px;
+            left: -19px;
+            width: 38px;
+            background: repeating-linear-gradient(
+                90deg,
+                #e8e4dc 0px,
+                #cfc8bc 1.5px,
+                #f5f2eb 3px
+            );
+            transform: rotateY(-90deg);
+            transform-origin: center;
+            box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.45);
+            border-radius: 2px;
+        }
+
+        /* Back Hardcover */
+        .book-back-cover {
+            position: absolute;
+            inset: 0;
+            border-radius: 6px 14px 14px 6px;
+            background: #050507;
+            border: 1px solid #3a0710;
+            transform: translateZ(-22px);
+        }
+
+        /* Floor Ambient Crimson Shadow below Book */
+        .book-floor-shadow {
+            width: 270px;
+            height: 26px;
+            margin: 18px auto 0;
+            background: radial-gradient(ellipse at center, rgba(200, 16, 46, 0.45) 0%, rgba(0, 0, 0, 0.85) 55%, transparent 75%);
+            filter: blur(8px);
+            border-radius: 50%;
+            animation: shadowBreathe 5s ease-in-out infinite;
+        }
+
+        @keyframes shadowBreathe {
+            0%, 100% { transform: scaleX(1); opacity: 0.85; }
+            50% { transform: scaleX(0.9); opacity: 0.6; }
+        }
+
+        @keyframes floatBook {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .book-float-container {
+            animation: floatBook 5.5s ease-in-out infinite;
+        }
+
+        @keyframes birdSoar {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-6px, -8px) rotate(-3deg); }
+        }
+
+        .cover-bird-anim {
+            animation: birdSoar 3.8s ease-in-out infinite;
+        }
+
+        /* Book Page Card Styling for Chapters & Quotes */
+        .book-page-card {
+            background-color: #0D0D11;
+            background-image:
+                radial-gradient(circle at top left, rgba(200, 16, 46, 0.11), transparent 48%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 4px);
+            border: 1px solid rgba(200, 16, 46, 0.28);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.82);
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-page-card:hover {
+            border-color: rgba(230, 25, 56, 0.72);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 28px rgba(200, 16, 46, 0.22);
+            transform: translateY(-4px);
+        }
+
+        /* Cover-Inspired Quote Card */
+        .cover-quote-card {
+            position: relative;
+            background-color: #0B0B0F;
+            background-image:
+                radial-gradient(circle at 85% 15%, rgba(200, 16, 46, 0.16) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 3px);
+            border: 1px solid rgba(200, 16, 46, 0.3);
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .cover-quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 22px;
+            width: 18px;
+            height: 26px;
+            background: linear-gradient(180deg, #E61938, #8f0c20);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+            opacity: 0.88;
+        }
+
+        .cover-quote-card:hover {
+            border-color: #E61938;
+            transform: translateY(-5px);
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.92), 0 0 26px rgba(230, 25, 56, 0.24);
+        }
+
+        /* Quote Highlight Box inside Chapters */
+        .chapter-quote-inset {
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.14) 0%, rgba(6, 6, 8, 0.9) 100%);
+            border-right: 4px solid #E61938;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal Backdrop */
+        .modal-backdrop {
+            background: rgba(6, 6, 8, 0.9);
+            backdrop-filter: blur(16px);
+        }
+
+        /* Highlight Pulse when jumping from Quiz */
+        @keyframes highlightCardPulse {
+            0% { box-shadow: 0 0 0 0 rgba(230, 25, 56, 0.9); border-color: #E61938; }
+            50% { box-shadow: 0 0 48px 14px rgba(230, 25, 56, 0.45); border-color: #E61938; }
+            100% { box-shadow: 0 20px 45px rgba(0, 0, 0, 0.82); border-color: rgba(200, 16, 46, 0.35); }
+        }
+
+        .card-highlighted {
+            animation: highlightCardPulse 2.4s ease-out;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blood-700 selection:text-white">
+
+    <!-- Top Crimson Reading Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Interactive HTML5 Canvas: Prison Bars & Crimson Sparks -->
+    <canvas id="prisonCanvas"></canvas>
+    <div class="ambient-chiaroscuro"></div>
+
+    <!-- Toast Notification Container (Zero alert() usage) -->
+    <div id="toast-container" class="fixed bottom-6 left-6 z-[10000] flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- STICKY HARDCOVER-THEMED NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 border-b border-blood-900/50 bg-[#060608]/90 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <!-- Brand & Mandatory Credit Subtitle -->
+            <a href="#top" class="flex items-center gap-3.5 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#C8102E] to-[#0D0D11] border border-[#E61938]/60 flex items-center justify-center shadow-crimson-glow group-hover:scale-105 transition-transform">
+                    <!-- Mini Book & Keyhole SVG -->
+                    <svg class="w-6 h-6 text-ivory-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="font-cover text-lg sm:text-xl font-bold tracking-wide text-ivory-100 group-hover:text-[#E61938] transition-colors">
+                        عُقَدُكَ النَّفْسِيَّةُ <span class="text-[#E61938]">سِجْنُكَ الأَبَدِيُّ</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-ivory-100 bg-[#2b040a]/90 border border-[#C8102E]/60 px-2.5 py-0.5 rounded-full mt-0.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#E61938] animate-ping"></span>
+                        <span>إعداد القارئين: قيس الجازي وراما العرايضة</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-bold text-ivory-200">
+                <a href="#about-book" class="hover:text-[#E61938] transition-colors py-1">فلسفة الكتاب</a>
+                <a href="#chapters-section" class="hover:text-[#E61938] transition-colors py-1">الفصول التسعة</a>
+                <a href="#quotes-gallery-section" class="hover:text-[#E61938] transition-colors py-1 flex items-center gap-1.5">
+                    <span>معرض الاقتباسات</span>
+                    <span class="px-1.5 py-0.5 text-[10px] rounded bg-[#C8102E] text-white">24</span>
+                </a>
+                <a href="#diagnostic-tool" class="hover:text-[#E61938] transition-colors py-1">اكتشف قيدك</a>
+                <a href="#credits-footer" class="hover:text-[#E61938] transition-colors py-1">فريق الإعداد</a>
+            </nav>
+
+            <!-- Quick Action Button -->
+            <div class="flex items-center gap-2">
+                <a href="#quotes-gallery-section" class="px-4 py-2 rounded-xl bg-gradient-to-l from-[#E61938] to-[#8f0c20] hover:from-[#ff2a4b] hover:to-[#C8102E] text-white text-xs sm:text-sm font-extrabold shadow-crimson-glow transition-all active:scale-95">
+                    اقتباسات الكتاب ❝
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="top" class="relative z-10">
+
+        <!-- HERO SECTION WITH INTERACTIVE 3D BOOK COVER MOCKUP -->
+        <section class="relative pt-10 pb-20 sm:pt-16 sm:pb-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+                    <!-- Right Column: Dramatic Book Typography, Mandatory Reader Credits & CTAs -->
+                    <div class="lg:col-span-7 text-right space-y-6 order-2 lg:order-1">
+                        <!-- Author & Edition Tag -->
+                        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0D0D11]/95 border border-[#8f0c20]/70 text-xs sm:text-sm font-bold text-ivory-200 shadow-lg">
+                            <span class="text-[#E61938]">✦</span>
+                            <span>قراءة تحليلية شاملة في كتاب الدكتور <strong class="text-white">يوسف الحسني</strong></span>
+                        </div>
+
+                        <!-- Iconic Cover-Matched Title -->
+                        <h1 class="font-cover text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.22] tracking-wide">
+                            <span class="block text-[#F5F5F7] drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">عُقَدُكَ النَّفْسِيَّةُ</span>
+                            <span class="block text-[#E61938] mt-2 drop-shadow-[0_0_28px_rgba(230,25,56,0.5)]">سِجْنُكَ الأَبَدِيُّ</span>
+                        </h1>
+
+                        <!-- Mandatory Prominent Reader Credit Plate -->
+                        <div class="pt-1">
+                            <div class="inline-flex flex-wrap items-center gap-3.5 px-5 py-3.5 rounded-2xl matte-hardcover-bg border-2 border-[#C8102E]/75 shadow-crimson-glow">
+                                <div class="w-10 h-10 rounded-xl bg-[#C8102E]/20 border border-[#E61938]/60 flex items-center justify-center text-[#E61938] shrink-0">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-3.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-bold text-[#E61938] tracking-wide">الطبعة التحليلية التفاعلية</p>
+                                    <p class="text-base sm:text-lg md:text-xl font-black text-white">
+                                        إعداد القارئين: <span class="text-[#E61938]">قيس الجازي</span> و<span class="text-[#E61938]">راما العرايضة</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Evocative Summary -->
+                        <p class="text-base sm:text-lg text-ivory-200/90 leading-relaxed max-w-2xl font-medium">
+                            بين دفتي هذا الكتاب الأسود تتكشف القضبان الخفية التي صيغت في طفولتنا وبقيت تحكم اختياراتنا وعلاقاتنا. تصفّح <strong class="text-white">الفصول التسعة الكاملة</strong> بشروحاتها النفسية ونصائحها، وغُص في <strong class="text-[#E61938]">معرض الاقتباسات الخالدة</strong> المصمم بروح غلاف الكتاب الأصلي.
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <button id="openBookHeroBtn" type="button" class="group relative inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-l from-[#E61938] via-[#C8102E] to-[#8f0c20] text-white font-extrabold text-base sm:text-lg shadow-crimson-intense hover:scale-[1.03] active:scale-95 transition-all cursor-pointer overflow-hidden">
+                                <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                                <span>افتح الكتاب وتصفح الفصول</span>
+                            </button>
+
+                            <a href="#quotes-gallery-section" class="inline-flex items-center gap-2.5 px-6 py-4 rounded-2xl bg-[#0D0D11]/95 hover:bg-[#2b040a]/70 border border-[#C8102E]/60 hover:border-[#E61938] text-ivory-100 hover:text-white font-bold text-base transition-all">
+                                <span class="text-[#E61938] text-xl leading-none">❝</span>
+                                <span>تصفح كل الاقتباسات (24)</span>
+                            </a>
+                        </div>
+
+                        <!-- Book Metadata Strip -->
+                        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-blood-900/40 max-w-lg">
+                            <div>
+                                <div class="font-cover text-2xl sm:text-3xl font-bold text-white">٩ فصول</div>
+                                <div class="text-xs sm:text-sm text-ivory-300">تشريح نفسي كامل</div>
+                            </div>
+                            <div>
+                                <div class="font-cover text-2xl sm:text-3xl font-bold text-[#E61938]">٢٤ اقتباساً</div>
+                                <div class="text-xs sm:text-sm text-ivory-300">درر من داخل الكتاب</div>
+                            </div>
+                            <div>
+                                <div class="font-cover text-2xl sm:text-3xl font-bold text-white">٥ أسئلة</div>
+                                <div class="text-xs sm:text-sm text-ivory-300">مقياس كشف القيد</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Left Column: INTERACTIVE 3D HARDCOVER BOOK MOCKUP -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center order-1 lg:order-2">
+                        <div id="bookStage" class="book-stage book-float-container py-4">
+                            <div id="book3dObject" class="book-3d-wrapper" title="انقر لفتح الكتاب وتصفح الفصول">
+
+                                <!-- FRONT HARDCOVER FACE (Faithful Iconic Cover Art) -->
+                                <div class="book-front-cover">
+                                    <!-- Subtle Red Ink Splatter Accent Top Left -->
+                                    <svg class="absolute -top-6 -left-6 w-36 h-36 opacity-35 pointer-events-none" viewBox="0 0 120 120" fill="none">
+                                        <circle cx="28" cy="28" r="18" fill="#C8102E"/>
+                                        <circle cx="52" cy="18" r="6" fill="#E61938"/>
+                                        <circle cx="18" cy="56" r="5" fill="#C8102E"/>
+                                        <path d="M25 25 Q45 42 62 35" stroke="#E61938" stroke-width="3" stroke-linecap="round"/>
+                                    </svg>
+
+                                    <!-- Top Cover Typography: Iconic Title -->
+                                    <div class="relative z-10 text-center pt-1">
+                                        <div class="text-[10px] tracking-[0.22em] text-ivory-300/80 font-bold mb-1">
+                                            دراسة في أعماق النفس البشرية
+                                        </div>
+                                        <div class="font-cover text-3xl sm:text-[34px] font-bold text-[#F5F5F7] leading-tight tracking-wide">
+                                            عُقَدُكَ النَّفْسِيَّةُ
+                                        </div>
+                                        <div class="font-cover text-3xl sm:text-[36px] font-bold text-[#E61938] leading-tight mt-0.5 drop-shadow-[0_0_16px_rgba(230,25,56,0.65)]">
+                                            سِجْنُكَ الأَبَدِيُّ
+                                        </div>
+                                    </div>
+
+                                    <!-- Centerpiece Cover SVG Artwork: Human Head Silhouette + Red/White Prison Bars + Keyhole + Escaping Crimson Bird -->
+                                    <div class="relative z-10 flex-1 flex items-center justify-center my-1">
+                                        <svg viewBox="0 0 260 250" class="w-full h-full max-h-[245px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <clipPath id="headSilhouetteClip">
+                                                    <path d="M115 232 C115 206, 98 197, 92 178 C80 173, 73 162, 81 151 C72 140, 78 125, 90 118 C87 72, 120 35, 166 35 C214 35, 246 72, 242 118 C239 156, 220 182, 208 204 L208 232 Z" />
+                                                </clipPath>
+                                                <radialGradient id="coverCrimsonBacklight" cx="50%" cy="50%" r="50%">
+                                                    <stop offset="0%" stop-color="#E61938" stop-opacity="0.45"/>
+                                                    <stop offset="70%" stop-color="#8f0c20" stop-opacity="0.1"/>
+                                                    <stop offset="100%" stop-color="#09090C" stop-opacity="0"/>
+                                                </radialGradient>
+                                            </defs>
+
+                                            <!-- Crimson Glow Behind Head -->
+                                            <circle cx="155" cy="130" r="105" fill="url(#coverCrimsonBacklight)" />
+
+                                            <!-- Human Head Silhouette Base -->
+                                            <path d="M115 232 C115 206, 98 197, 92 178 C80 173, 73 162, 81 151 C72 140, 78 125, 90 118 C87 72, 120 35, 166 35 C214 35, 246 72, 242 118 C239 156, 220 182, 208 204 L208 232 Z"
+                                                  fill="#121218" stroke="#C8102E" stroke-width="2.2" />
+
+                                            <!-- Vertical Prison Bars (Alternating Red & Ivory White) Clipped Inside Head -->
+                                            <g clip-path="url(#headSilhouetteClip)">
+                                                <line x1="102" y1="30" x2="102" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.85" />
+                                                <line x1="120" y1="30" x2="120" y2="235" stroke="#C8102E" stroke-width="3.8" />
+                                                <line x1="138" y1="30" x2="138" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.9" />
+                                                <!-- Central Fractured Bars around Keyhole -->
+                                                <line x1="156" y1="30" x2="156" y2="92" stroke="#E61938" stroke-width="4" />
+                                                <line x1="156" y1="158" x2="156" y2="235" stroke="#E61938" stroke-width="4" />
+                                                <line x1="174" y1="30" x2="174" y2="98" stroke="#F5F5F7" stroke-width="3.2" opacity="0.85" />
+                                                <line x1="174" y1="154" x2="174" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.85" />
+                                                <line x1="192" y1="30" x2="192" y2="235" stroke="#C8102E" stroke-width="3.8" />
+                                                <line x1="210" y1="30" x2="210" y2="235" stroke="#F5F5F7" stroke-width="3.2" opacity="0.8" />
+                                                <line x1="228" y1="30" x2="228" y2="235" stroke="#C8102E" stroke-width="3.5" />
+
+                                                <!-- Keyhole Void inside the Mind -->
+                                                <circle cx="164" cy="116" r="14" fill="#060608" stroke="#E61938" stroke-width="2.5" />
+                                                <path d="M156 126 L172 126 L176 152 L152 152 Z" fill="#060608" stroke="#E61938" stroke-width="2.2" />
+                                            </g>
+
+                                            <!-- Crimson Ink Strokes & Shattered Fragments Breaking Left -->
+                                            <g fill="#E61938">
+                                                <circle cx="66" cy="105" r="3.5" />
+                                                <circle cx="52" cy="92" r="2.2" />
+                                                <circle cx="72" cy="84" r="2.5" />
+                                                <polygon points="132,102 122,94 126,107" />
+                                                <polygon points="135,142 123,148 131,152" />
+                                            </g>
+
+                                            <!-- Soaring Crimson Bird Escaping from the Mind's Keyhole -->
+                                            <g class="cover-bird-anim">
+                                                <path d="M44 74 C66 56, 86 68, 98 84 C112 64, 134 52, 158 64 C132 70, 114 84, 100 102 C86 86, 68 76, 44 74 Z"
+                                                      fill="#E61938" stroke="#F5F5F7" stroke-width="1" />
+                                                <path d="M88 88 L72 98 L94 94 Z" fill="#F5F5F7" />
+                                            </g>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Bottom Cover: Author Name & Reader Edition Seal -->
+                                    <div class="relative z-10 text-center space-y-2 border-t border-[#8f0c20]/60 pt-2.5">
+                                        <div class="font-serif text-lg sm:text-xl font-bold text-[#F5F5F7] tracking-wide">
+                                            د. يوسف الحسني
+                                        </div>
+                                        <div class="inline-block px-3 py-1 rounded-full bg-[#2b040a]/95 border border-[#C8102E]/70 text-[10px] sm:text-[11px] font-bold text-ivory-100">
+                                            إعداد القارئين: <span class="text-[#E61938]">قيس الجازي وراما العرايضة</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- RIGHT SPINE (كعب الكتاب) -->
+                                <div class="book-spine">
+                                    <span class="book-spine-text">عُقدك النفسية سجنك الأبدي • د. يوسف الحسني</span>
+                                </div>
+
+                                <!-- LEFT PAPER PAGE EDGES (حواف الصفحات) -->
+                                <div class="book-pages-edge"></div>
+
+                                <!-- BACK COVER -->
+                                <div class="book-back-cover"></div>
+                            </div>
+
+                            <!-- Ambient Crimson Floor Shadow -->
+                            <div class="book-floor-shadow"></div>
+                        </div>
+
+                        <!-- Interactive Book Angle Toggle -->
+                        <div class="flex items-center gap-3 mt-2">
+                            <button id="toggleBookAngleBtn" type="button" class="px-4 py-1.5 rounded-full bg-[#0D0D11] hover:bg-[#2b040a] border border-[#8f0c20]/60 text-xs font-bold text-ivory-200 transition-colors cursor-pointer">
+                                تبديل زاوية عرض الغلاف ↻
+                            </button>
+                            <span class="text-[11px] text-ivory-300/70">حرّك المؤشر فوق الغلاف</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOK PHILOSOPHY & HARDCOVER OVERVIEW -->
+        <section id="about-book" class="py-16 sm:py-20 border-t border-blood-900/40 bg-[#0D0D11]/80 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="book-page-card rounded-3xl p-7 sm:p-12 reveal-item">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-8 space-y-5">
+                            <div class="inline-flex items-center gap-2 text-xs font-extrabold tracking-widest text-[#E61938]">
+                                <span class="w-7 h-[2px] bg-[#E61938]"></span>
+                                <span>بطاقة تعريف الكتاب</span>
+                            </div>
+                            <h2 class="font-cover text-2xl sm:text-4xl font-bold text-white leading-snug">
+                                سجنٌ لا جدران له.. مفاتيحه في وعيك!
+                            </h2>
+                            <p class="text-ivory-200 text-base sm:text-lg leading-relaxed">
+                                يُعدّ كتاب <strong class="text-white">«عُقدك النفسية سجنك الأبدي»</strong> للدكتور <strong class="text-[#E61938]">يوسف الحسني</strong> مرآةً صادقة ومواجهة جريئة مع الذات، حيث يكشف كيف تتحول تجارب الطفولة القاسية، وضغوط المجتمع، وثقافة العار، والتعلق المرضي إلى قضبان غير مرئية تحبس الإنسان داخل نسخة مزيّفة من نفسه.
+                            </p>
+                            <p class="text-ivory-300 text-sm sm:text-base leading-relaxed">
+                                قام القارئان <strong class="text-white">قيس الجازي وراما العرايضة</strong> بإعداد هذه المنصة المعرفية لتضم خلاصة الفصول التسعة بأسلوب منهجي (الاقتباس، الشرح، النصيحة، والفائدة)، إلى جانب معرض شامل لأجمل الاقتباسات الخالدة داخل الكتاب.
+                            </p>
+                        </div>
+
+                        <div class="lg:col-span-4 grid grid-cols-1 gap-4">
+                            <div class="p-5 rounded-2xl bg-[#060608]/95 border border-[#8f0c20]/50">
+                                <div class="text-[#E61938] font-black text-base mb-1">٠١. كشف الأقنعة</div>
+                                <p class="text-xs sm:text-sm text-ivory-300 leading-relaxed">فهم الحيل الدفاعية التي يمارسها اللاوعي للهروب من مواجهة الجروح القديمة.</p>
+                            </div>
+                            <div class="p-5 rounded-2xl bg-[#060608]/95 border border-[#8f0c20]/50">
+                                <div class="text-[#E61938] font-black text-base mb-1">٠٢. تفكيك البرمجة</div>
+                                <p class="text-xs sm:text-sm text-ivory-300 leading-relaxed">التمييز بين صوتك الحقيقي وبين أحكام المجتمع والأسرة الموروثة.</p>
+                            </div>
+                            <div class="p-5 rounded-2xl bg-[#060608]/95 border border-[#8f0c20]/50">
+                                <div class="text-[#E61938] font-black text-base mb-1">٠٣. التحرر الواعي</div>
+                                <p class="text-xs sm:text-sm text-ivory-300 leading-relaxed">تحويل الألم إلى وعي وبناء علاقات قائمة على الحرية والاستحقاق الصحي.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ALL 9 CHAPTERS OF THE BOOK -->
+        <section id="chapters-section" class="py-16 sm:py-24 border-t border-blood-900/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Header & Search -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal-item">
+                    <div class="space-y-2">
+                        <div class="inline-flex items-center gap-2 text-xs font-extrabold text-[#E61938]">
+                            <span class="w-7 h-[2px] bg-[#E61938]"></span>
+                            <span>صفحات الكتاب التحليلية</span>
+                        </div>
+                        <h2 class="font-cover text-3xl sm:text-5xl font-bold text-white">
+                            فصول الكتاب التسعة
+                        </h2>
+                        <p class="text-ivory-300 text-sm sm:text-base max-w-2xl">
+                            لكل فصل من الكتاب: <strong class="text-[#E61938]">اقتباس محوري</strong>، <strong class="text-white">شرح نفسي معمّق</strong>، <strong class="text-[#E61938]">نصيحة عملية</strong>، و<strong class="text-white">الفائدة المرجوة</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Chapter Search Box -->
+                    <div class="w-full lg:w-96">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                id="chapterSearchInput"
+                                placeholder="ابحث في الفصول التسعة أو الشروحات..."
+                                class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[#0D0D11] border border-[#8f0c20]/60 focus:border-[#E61938] focus:ring-2 focus:ring-[#E61938]/25 text-white placeholder-ivory-300/45 text-sm outline-none transition-all"
+                            />
+                            <svg class="w-5 h-5 text-[#E61938] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter Filter Pills -->
+                <div id="chapter-filter-pills" class="flex flex-wrap items-center gap-2.5 mb-10 reveal-item">
+                    <button type="button" data-filter="all" class="chapter-pill active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#C8102E] text-white shadow-crimson-glow transition-all cursor-pointer">
+                        جميع الفصول (9)
+                    </button>
+                    <button type="button" data-filter="awareness" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                        الوعي والطفولة
+                    </button>
+                    <button type="button" data-filter="society" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                        المجتمع والعار والرفض
+                    </button>
+                    <button type="button" data-filter="relationships" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                        العلاقات والذات والأقنعة
+                    </button>
+                    <button type="button" data-filter="liberation" class="chapter-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D0D11] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                        كسر القضبان والتحرر
+                    </button>
+                </div>
+
+                <!-- Empty Chapter Search State -->
+                <div id="empty-chapter-state" class="hidden text-center py-16 book-page-card rounded-3xl">
+                    <div class="text-4xl mb-3">📖</div>
+                    <h3 class="text-xl font-bold text-white mb-2">لا يوجد فصل يطابق عبارة البحث</h3>
+                    <p class="text-ivory-300 text-sm mb-5">جرّب البحث بكلمات مثل: القطيع، العار، الطفولة، التعلق، النقص، أو التحرر.</p>
+                    <button id="resetChapterSearchBtn" type="button" class="px-5 py-2.5 rounded-xl bg-[#C8102E] text-white text-sm font-bold cursor-pointer">
+                        إظهار الفصول التسعة
+                    </button>
+                </div>
+
+                <!-- Chapters Grid -->
+                <div id="chapters-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             NEW DEDICATED SECTION: «معرض الاقتباسات الخالدة من الكتاب»
+             Designed as a Collector's Hardcover Wall of 24 Quotes
+             ===================================================================== -->
+        <section id="quotes-gallery-section" class="py-16 sm:py-24 border-t border-blood-900/50 bg-[#09090D]/90 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-12 reveal-item">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2b040a] border border-[#C8102E]/60 text-[#E61938] text-xs font-extrabold">
+                        <span>❝</span>
+                        <span>مختارات من بين سطور الكتاب</span>
+                        <span>❞</span>
+                    </div>
+                    <h2 class="font-cover text-3xl sm:text-5xl font-bold text-white leading-snug">
+                        معرض الاقتباسات الخالدة من الكتاب
+                    </h2>
+                    <p class="text-ivory-300 text-sm sm:text-base leading-relaxed">
+                        أجمل وأعمق ٢٤ اقتباساً منتقى بعناية من صفحات كتاب <strong class="text-white">«عُقدك النفسية سجنك الأبدي»</strong>. يمكنك نسخ أي اقتباس فوراً أو معاينته ومشاركته داخل <strong class="text-[#E61938]">بطاقة غلاف الكتاب المصغرة</strong> بتوقيع القارئين.
+                    </p>
+                </div>
+
+                <!-- Quotes Search & Topic Filter Controls -->
+                <div class="book-page-card rounded-3xl p-5 sm:p-6 mb-10 space-y-5 reveal-item">
+                    <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+                        <!-- Search inside Quotes -->
+                        <div class="relative flex-1">
+                            <input
+                                type="text"
+                                id="quoteSearchInput"
+                                placeholder="ابحث داخل الاقتباسات (مثال: الحرية، الخوف، الطفولة، القطيع، الحب، القناع)..."
+                                class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[#060608] border border-[#8f0c20]/60 focus:border-[#E61938] focus:ring-2 focus:ring-[#E61938]/25 text-white placeholder-ivory-300/45 text-sm outline-none transition-all"
+                            />
+                            <svg class="w-5 h-5 text-[#E61938] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+
+                        <!-- Live Quotes Counter -->
+                        <div class="flex items-center justify-between md:justify-end gap-3 px-4 py-2.5 rounded-2xl bg-[#060608] border border-blood-900/50 text-xs sm:text-sm font-bold text-ivory-200 shrink-0">
+                            <span>الاقتباسات المعروضة:</span>
+                            <span id="quotesCountBadge" class="px-2.5 py-0.5 rounded-lg bg-[#C8102E] text-white font-black">24</span>
+                        </div>
+                    </div>
+
+                    <!-- Topic Filter Pills -->
+                    <div id="quote-filter-pills" class="flex flex-wrap items-center gap-2">
+                        <button type="button" data-qfilter="all" class="quote-pill active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#C8102E] text-white shadow-crimson-glow transition-all cursor-pointer">
+                            الكل (24)
+                        </button>
+                        <button type="button" data-qfilter="knot" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                            العقدة النفسية
+                        </button>
+                        <button type="button" data-qfilter="society" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                            المجتمع والقطيع
+                        </button>
+                        <button type="button" data-qfilter="shame" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                            العار والذنب
+                        </button>
+                        <button type="button" data-qfilter="childhood" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                            الطفولة
+                        </button>
+                        <button type="button" data-qfilter="relationships" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                            العلاقات
+                        </button>
+                        <button type="button" data-qfilter="freedom" class="quote-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#060608] border border-[#8f0c20]/50 text-ivory-200 hover:border-[#E61938] transition-all cursor-pointer">
+                            الحرية والوعي
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empty Quotes Search State -->
+                <div id="empty-quotes-state" class="hidden text-center py-16 book-page-card rounded-3xl">
+                    <div class="text-4xl mb-3">❝</div>
+                    <h3 class="text-xl font-bold text-white mb-2">لم نعثر على اقتباس يطابق بحثك</h3>
+                    <p class="text-ivory-300 text-sm mb-5">جرّب البحث بكلمة أخرى أو اختر تصنيف «الكل» لاستعراض جميع الاقتباسات.</p>
+                    <button id="resetQuotesSearchBtn" type="button" class="px-5 py-2.5 rounded-xl bg-[#C8102E] text-white text-sm font-bold cursor-pointer">
+                        عرض كل الاقتباسات (24)
+                    </button>
+                </div>
+
+                <!-- Quotes Grid (Cover-Inspired Cards) -->
+                <div id="quotes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamically populated via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- INTERACTIVE SELF-DISCOVERY QUIZ (5 DEEP QUESTIONS) -->
+        <section id="diagnostic-tool" class="py-16 sm:py-24 border-t border-blood-900/40">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-3 mb-10 reveal-item">
+                    <span class="inline-block px-4 py-1 rounded-full bg-[#2b040a] border border-[#C8102E]/60 text-[#E61938] text-xs font-extrabold">
+                        مقياس التأمل النفسي (٥ أسئلة عميقة)
+                    </span>
+                    <h2 class="font-cover text-3xl sm:text-5xl font-bold text-white">
+                        اكتشف قيدك النفسي الخفي
+                    </h2>
+                    <p class="text-ivory-300 text-sm sm:text-base max-w-xl mx-auto">
+                        أجب بصدق عن ٥ مواقف حياتية لنكشف لك أبرز عقدة نفسية قد تقيدك، والفصل المناسب لك من الكتاب ونصيحة التحرر.
+                    </p>
+                </div>
+
+                <div class="book-page-card rounded-3xl p-6 sm:p-10 relative overflow-hidden reveal-item">
+                    <div class="absolute -top-20 -left-20 w-52 h-52 bg-[#E61938]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Quiz Body -->
+                    <div id="quiz-body">
+                        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                            <span 202520451
